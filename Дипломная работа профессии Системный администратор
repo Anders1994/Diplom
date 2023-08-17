@@ -1,0 +1,6 @@
+# Дипломная раота по профессии "Системный администратор" - `Загурский Андрей`
+
+Сервера: Web, Prometheus, Elasticsearch размещены в приватных подсетях.
+Сервера: Grafana, Kibana, Application load balancer размещены в публичных подсетях. 
+Сервера: web1 и web2 размещены в разных зонах доступности.
+![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/%D0%A1%D0%BA%D1%80%D0%B8%D0%BD%201.png)

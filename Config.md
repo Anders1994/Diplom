@@ -10,7 +10,7 @@
 
 <details>
 
-**<summary>/home/admin/terraform/config.tf</summary>**
+*<summary>/home/admin/terraform/config.tf</summary>*
 
 ``` GO
 
@@ -307,7 +307,7 @@ output "schedule_disk" {
 
 <details>
 
-**<summary>/home/admin/terraform/backendgroup/config.tf</summary>**
+*<summary>/home/admin/terraform/backendgroup/config.tf</summary>*
 
 ``` GO
 
@@ -319,7 +319,7 @@ hello world!
 
 <details>
 
-**<summary>/etc/ansible/ansible.cfg</summary>**
+*<summary>/etc/ansible/ansible.cfg</summary>*
 
 ``` GO
 
@@ -330,7 +330,7 @@ remote_user = user
 
 <details>
 
-**<summary>/etc/ansible/hosts</summary>**
+*<summary>/etc/ansible/hosts</summary>*
 
 ``` GO
 
@@ -360,7 +360,7 @@ vm8 ansible_host=192.168.2.17
 
 <details>
 
-**<summary>/etc/ansible/play.yml</summary>**
+*<summary>/etc/ansible/play.yml</summary>*
 
 ``` JSON 
 
@@ -428,7 +428,7 @@ vm8 ansible_host=192.168.2.17
 
 <details>
 
-**<summary>NEW</summary>**
+*<summary>NEW</summary>*
 
 ``` GO
 
@@ -438,7 +438,7 @@ hello world!
 
 <details>
 
-**<summary>NEW</summary>**
+*<summary>NEW</summary>*
 
 ``` GO
 

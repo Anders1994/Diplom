@@ -3,7 +3,6 @@
 * [Terraform](#Terraform)
 * [Ansible](#Ansible)
 * [NEW](#NEW)
-* [NEW](#NEW)
 
 ---------
 ### Terraform

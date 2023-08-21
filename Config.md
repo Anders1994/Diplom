@@ -1,4 +1,11 @@
-### Terraform
+### Configurations
+
+<details>
+
+<summary>Terraform</summary>
+
+#### /home/admin/terraform/config.tf
+
 ```
 terraform {
 
@@ -288,23 +295,6 @@ output "external_ip_address_vm_8" {
 output "schedule_disk" {
   value =  [   resource.yandex_compute_instance.vm2.boot_disk[0].disk_id   ]
 }
-```
----
-
-### Ansible ?
-
-<details>
-
-<summary>Tips for collapsed sections</summary>
-
-### You can add a header
-
-You can add text within a collapsed section. 
-
-You can add an image or a code block, too.
-
-```ruby
-   puts "Hello World"
 ```
 
 </details>

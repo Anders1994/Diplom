@@ -309,7 +309,6 @@ output "schedule_disk" {
 ##### /etc/ansible/hosts
 
 ``` go
-
 [web_servers]
 vm2 ansible_host=192.168.2.15
 vm3 ansible_host=192.168.3.4
@@ -331,16 +330,13 @@ vm7 ansible_host=192.168.2.14
 
 [bastion]
 vm8 ansible_host=192.168.2.17
-
 ```
 
 ##### /etc/ansible/ansible.cfg
 
 ``` go
-
 [defaults]
 remote_user = user
-
 ```
 
 </details>

@@ -334,6 +334,15 @@ vm8 ansible_host=192.168.2.17
 
 ```
 
+##### /etc/ansible/ansible.cfg
+
+``` go
+
+[defaults]
+remote_user = user
+
+```
+
 </details>
 
 <details>

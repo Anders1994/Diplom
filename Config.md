@@ -332,7 +332,7 @@ remote_user = user
 
 *<summary>/etc/ansible/hosts</summary>*
 
-``` GO
+```
 
 [web_servers]
 vm2 ansible_host=192.168.2.15
@@ -362,7 +362,7 @@ vm8 ansible_host=192.168.2.17
 
 *<summary>/etc/ansible/play.yml</summary>*
 
-``` JSON 
+``` 
 
 - hosts: web_servers
   become: true

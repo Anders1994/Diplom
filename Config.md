@@ -6,7 +6,7 @@
 
 #### /home/admin/terraform/config.tf
 
-``` shell
+``` go
 terraform {
 
   required_providers {

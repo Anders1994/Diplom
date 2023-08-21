@@ -1,5 +1,5 @@
 #Terraform
-
+```python
 terraform {
 
   required_providers {
@@ -326,3 +326,4 @@ output "external_ip_address_vm_8" {
 output "schedule_disk" {
   value =  [   resource.yandex_compute_instance.vm2.boot_disk[0].disk_id   ]
 }
+```

@@ -1,5 +1,9 @@
 ### Configurations
 
+Содержание
+==========
+* [Terraform](# /home/admin/terraform/config.tf)
+
 <details>
 
 <summary>Terraform</summary>

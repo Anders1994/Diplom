@@ -1,18 +1,31 @@
 #Terraform
+
 terraform {
+
   required_providers {
+
     yandex = {
+
       source = "yandex-cloud/yandex"
+
     }
+
   }
+
   required_version = ">= 0.13"
+
 }
 
 
+
 provider "yandex" {
+
     cloud_id  = "b1gcvt5l6bsrvg3nfac5"
+
   folder_id = "b1g0bhh4bik34mog3r9m"
+
   zone      = "ru-central1-a"
+
 }
 
 
@@ -21,7 +34,9 @@ provider "yandex" {
 
 
 resource "yandex_vpc_network" "anders" {
+
   name = "anders"
+
 }
 
 

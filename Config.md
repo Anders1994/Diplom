@@ -16,8 +16,6 @@ terraform {
 
 }
 
-
-
 provider "yandex" {
 
     cloud_id  = "b1gcvt5l6bsrvg3nfac5"
@@ -28,21 +26,13 @@ provider "yandex" {
 
 }
 
-
-
-
-
+////////////////////////////////////////////////////////////////////////
 
 resource "yandex_vpc_network" "anders" {
 
   name = "anders"
 
 }
-
-
-
-
-
 
 resource "yandex_vpc_subnet" "anders2" {
   name           = "anders2"
@@ -51,10 +41,6 @@ resource "yandex_vpc_subnet" "anders2" {
   v4_cidr_blocks = ["192.168.2.0/24"]
 }
 
-
-
-
-
 resource "yandex_vpc_subnet" "anders3" {
   name           = "anders3"
   zone           = "ru-central1-b"
@@ -62,11 +48,7 @@ resource "yandex_vpc_subnet" "anders3" {
   v4_cidr_blocks = ["192.168.3.0/24"]
 }
 
-
-
-
-
-
+////////////////////////////////////////////////////////////////////////
 
 resource "yandex_compute_instance" "vm2" {
   name = "web1"
@@ -98,10 +80,7 @@ output "internal_ip_address_vm_2" {
   value = yandex_compute_instance.vm2.network_interface.0.ip_address
 }
 
-
-
-
-
+////////////////////////////////////////////////////////////////////////
 
 resource "yandex_compute_instance" "vm3" {
   name = "web2"
@@ -130,17 +109,11 @@ resource "yandex_compute_instance" "vm3" {
   }
 }
 
-
-
-
 output "internal_ip_address_vm_3" {
   value = yandex_compute_instance.vm3.network_interface.0.ip_address
 }
 
-
-
-
-
+////////////////////////////////////////////////////////////////////////
 
 resource "yandex_compute_instance" "vm4" {
   name = "prometheus"
@@ -172,10 +145,7 @@ output "internal_ip_address_vm_4" {
   value = yandex_compute_instance.vm4.network_interface.0.ip_address
 }
 
-
-
-
-
+////////////////////////////////////////////////////////////////////////
 
 resource "yandex_compute_instance" "vm5" {
   name = "grafana"
@@ -210,10 +180,7 @@ output "external_ip_address_vm_5" {
   value = yandex_compute_instance.vm5.network_interface.0.nat_ip_address
 }
 
-
-
-
-
+////////////////////////////////////////////////////////////////////////
 
 resource "yandex_compute_instance" "vm6" {
   name = "elasticsearch"
@@ -245,10 +212,7 @@ output "internal_ip_address_vm_6" {
   value = yandex_compute_instance.vm6.network_interface.0.ip_address
 }
 
-
-
-
-
+////////////////////////////////////////////////////////////////////////
 
 resource "yandex_compute_instance" "vm7" {
   name = "kibana"
@@ -284,10 +248,7 @@ output "external_ip_address_vm_7" {
   value = yandex_compute_instance.vm7.network_interface.0.nat_ip_address
 }
 
-
-
-
-
+////////////////////////////////////////////////////////////////////////
 
 resource "yandex_compute_instance" "vm8" {
   name = "bastion"

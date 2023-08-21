@@ -4,9 +4,10 @@
 
 <summary>Terraform</summary>
 
-#### /home/admin/terraform/config.tf
+##### /home/admin/terraform/config.tf
 
 ``` go
+
 terraform {
 
   required_providers {
@@ -295,6 +296,7 @@ output "external_ip_address_vm_8" {
 output "schedule_disk" {
   value =  [   resource.yandex_compute_instance.vm2.boot_disk[0].disk_id   ]
 }
+
 ```
 
 </details>
@@ -303,15 +305,41 @@ output "schedule_disk" {
 <details>
 
 <summary>Ansible</summary>
+
+##### /etc/ansible/hosts
+
+``` go
+
+[web_servers]
+vm2 ansible_host=192.168.2.15
+vm3 ansible_host=192.168.3.4
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+
+[prometheus]
+vm4 ansible_host=192.168.2.33
+
+[grafana]
+vm5 ansible_host=192.168.2.36
+
+[Elasticsearch]
+vm6 ansible_host=192.168.2.23
+
+[kibana]
+vm7 ansible_host=192.168.2.14
+
+[bastion]
+vm8 ansible_host=192.168.2.17
+
 ```
-hello world!
-```
+
 </details>
 
 <details>
 
 <summary>NGINX</summary>
-```
+``` go
 hello world!
 ```
 </details>
@@ -319,7 +347,7 @@ hello world!
 <details>
 
 <summary>Grafana</summary>
-```
+``` go
 hello world!
 ```
 </details>

@@ -297,9 +297,29 @@ output "schedule_disk" {
 }
 ```
 
+</details>
+
+
+<details>
+
 <summary>Ansible</summary>
 ```
 hello world!
 ```
+</details>
 
+<details>
+
+<summary>NGINX</summary>
+```
+hello world!
+```
+</details>
+
+<details>
+
+<summary>Grafana</summary>
+```
+hello world!
+```
 </details>

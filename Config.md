@@ -1,5 +1,5 @@
 #Terraform
-```python
+```
 terraform {
 
   required_providers {

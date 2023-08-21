@@ -1,12 +1,18 @@
-### Configurations
+Содержание
+==========
+* [Terraform](#Terraform)
+* [Ansible](#Ansible)
+* [NEW](#NEW)
+* [NEW](#NEW)
+
+---------
+### Terraform
 
 <details>
 
-<summary>Terraform</summary>
+<summary>/home/admin/terraform/config.tf</summary>
 
-##### /home/admin/terraform/config.tf
-
-``` go
+``` GO
 
 terraform {
 
@@ -296,19 +302,38 @@ output "external_ip_address_vm_8" {
 output "schedule_disk" {
   value =  [   resource.yandex_compute_instance.vm2.boot_disk[0].disk_id   ]
 }
-
 ```
-
 </details>
-
 
 <details>
 
-<summary>Ansible</summary>
+<summary>/home/admin/terraform/backendgroup/config.tf</summary>
 
-##### /etc/ansible/hosts
+``` GO
 
-``` go
+hello world!
+```
+</details>
+
+### Ansible
+
+<details>
+
+<summary>/etc/ansible/ansible.cfg</summary>
+
+``` GO
+
+[defaults]
+remote_user = user
+```
+</details>
+
+<details>
+
+<summary>/etc/ansible/hosts</summary>
+
+``` GO
+
 [web_servers]
 vm2 ansible_host=192.168.2.15
 vm3 ansible_host=192.168.3.4
@@ -331,28 +356,92 @@ vm7 ansible_host=192.168.2.14
 [bastion]
 vm8 ansible_host=192.168.2.17
 ```
-
-##### /etc/ansible/ansible.cfg
-
-``` go
-[defaults]
-remote_user = user
-```
-
 </details>
 
 <details>
 
-<summary>NGINX</summary>
-``` go
+<summary>/etc/ansible/play.yml</summary>
+
+``` JSON 
+
+- hosts: web_servers
+  become: true
+  become_method: sudo
+  become_user: root
+  remote_user: admin
+  roles:
+   - role: nginx
+   - role: node-exporter
+     tags: exporter
+   - role: filebeat
+     tags: filebeat
+
+  vars:
+    nginx_user: www-data
+
+- hosts: prometheus
+  user: admin
+  become: true
+  become_method: sudo
+  become_user: root
+  roles:
+    - role: Prometheus
+      tags: prom
+- hosts: grafana
+  user: admin
+  become: true
+  become_method: sudo
+  become_user: root
+  roles:
+    - role: Grafana
+      tags: graf
+- hosts: Elasticsearch
+  user: admin
+  become: true
+  become_method: sudo
+  become_user: root
+  roles:
+    - role: Elasticsearch
+      tags: elastic
+
+- hosts: kibana
+  user: admin
+  become: true
+  become_method: sudo
+  become_user: root
+  roles:
+    - role: kibana
+      tags: kibana
+
+- hosts: bastion
+  user: admin
+  become: true
+  become_method: sudo
+  become_user: root
+  roles:
+    - role: bastion
+      tags: bastion
+```
+</details>
+
+### NEW
+
+<details>
+
+<summary>NEW</summary>
+
+``` GO
+
 hello world!
 ```
 </details>
 
 <details>
 
-<summary>Grafana</summary>
-``` go
+<summary>NEW</summary>
+
+``` GO
+
 hello world!
 ```
 </details>

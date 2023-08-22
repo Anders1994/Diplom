@@ -12,9 +12,7 @@
    * [bastion](#bastion)
 
 ---------
-### Terraform
-
-/home/admin/terraform/
+### Terraform: /home/admin/terraform/
 
 <details>
 

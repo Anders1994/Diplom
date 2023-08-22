@@ -679,12 +679,12 @@ remote_user = user
 
 ``` GO
 
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+
 [web_servers]
 vm2 ansible_host=192.168.2.15
 vm3 ansible_host=192.168.3.4
-
-[all:vars]
-ansible_python_interpreter=/usr/bin/python3
 
 [prometheus]
 vm4 ansible_host=192.168.2.33

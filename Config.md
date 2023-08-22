@@ -81,7 +81,7 @@ resource "yandex_compute_instance" "vm2" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.anders2.id
-    nat       = false
+    nat       = true
   }
 
   metadata = {
@@ -114,7 +114,7 @@ resource "yandex_compute_instance" "vm3" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.anders3.id
-    nat       = false
+    nat       = true
   }
 
   metadata = {
@@ -146,7 +146,7 @@ resource "yandex_compute_instance" "vm4" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.anders2.id
-    nat       = false
+    nat       = true
 
   }
   metadata = {
@@ -214,7 +214,7 @@ resource "yandex_compute_instance" "vm6" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.anders2.id
-    nat       = false
+    nat       = true
   }
 
   metadata = {

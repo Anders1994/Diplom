@@ -1,6 +1,6 @@
 Содержание
 ==========
-* [Terraform](#Terraform)
+* [Terraform](#Terraform: /home/admin/terraform/)
 * [Ansible](#Ansible)
    * [node-exporter](#node-exporter)
    * [prometheus](#prometheus)

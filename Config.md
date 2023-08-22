@@ -684,9 +684,7 @@ resource "yandex_compute_snapshot_schedule" "default" {
 ```
 </details>
 
-### Ansible
-
-/etc/ansible/
+### Ansible: /etc/ansible/
 
 <details>
 

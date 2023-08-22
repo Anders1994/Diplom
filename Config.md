@@ -14,7 +14,7 @@
 ---------
 ### Terraform
 
-/home/admin/terraform/
+`/home/admin/terraform/`
 
 <details>
 
@@ -688,7 +688,7 @@ resource "yandex_compute_snapshot_schedule" "default" {
 
 ### Ansible
 
-/etc/ansible/
+`/etc/ansible/`
 
 <details>
 

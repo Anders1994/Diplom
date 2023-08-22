@@ -18,7 +18,7 @@
 
 <details>
 
-*<summary>ppk (terraform, bastion)</summary>*
+*<summary>ppk (bastion)</summary>*
 
 ``` GO
 

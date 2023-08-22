@@ -1534,10 +1534,11 @@ pid.file: /run/kibana/kibana.pid
 
 - name: Copy id_rsa
   copy:
-    src: /home/vm1/.ssh/id_rsa
-    dest: /home/user/.ssh
-    owner: user
-    group: user
+    src: /home/admin/.ssh/id_rsa
+    dest: /home/admin/.ssh
+    owner: admin
+    group: admin
     mode: '0600'
+
 ```
 </details>

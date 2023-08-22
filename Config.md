@@ -14,9 +14,11 @@
 ---------
 ### Terraform
 
+/home/admin/terraform/
+
 <details>
 
-*<summary>/home/admin/terraform/metadata.txt</summary>*
+*<summary>metadata.txt</summary>*
 
 ``` GO
 
@@ -33,7 +35,7 @@ users:
 
 <details>
 
-*<summary>/home/admin/terraform/config.tf</summary>*
+*<summary>config.tf</summary>*
 
 ``` GO
 
@@ -330,7 +332,7 @@ output "schedule_disk" {
 
 <details>
 
-*<summary>/home/admin/terraform/targetgroup/config.tf</summary>*
+*<summary>targetgroup/config.tf</summary>*
 
 ``` GO
 
@@ -367,7 +369,7 @@ resource "yandex_alb_target_group" "foo" {
 
 <details>
 
-*<summary>/home/admin/terraform/backendgroup/config.tf</summary>*
+*<summary>backendgroup/config.tf</summary>*
 
 ``` GO
 
@@ -422,7 +424,7 @@ resource "yandex_alb_backend_group" "test-backend-group" {
 
 <details>
 
-*<summary>/home/admin/terraform/router/config.tf</summary>*
+*<summary>router/config.tf</summary>*
 
 ``` GO
 
@@ -468,7 +470,7 @@ resource "yandex_alb_virtual_host" "my-virtual-host" {
 
 <details>
 
-*<summary>/home/admin/terraform/balancer/config.tf</summary>*
+*<summary>balancer/config.tf</summary>*
 
 ``` GO
 
@@ -522,7 +524,7 @@ resource "yandex_alb_load_balancer" "test-balancer" {
 
 <details>
 
-*<summary>/home/admin/terraform/security/config.tf</summary>*
+*<summary>security/config.tf</summary>*
 
 ``` GO
 
@@ -609,7 +611,7 @@ resource "yandex_vpc_security_group" "bastion" {
 
 <details>
 
-*<summary>/home/admin/terraform/snapshots/config.tf</summary>*
+*<summary>snapshots/config.tf</summary>*
 
 ``` GO
 
@@ -686,9 +688,11 @@ resource "yandex_compute_snapshot_schedule" "default" {
 
 ### Ansible
 
+/etc/ansible/
+
 <details>
 
-*<summary>/etc/ansible/ansible.cfg</summary>*
+*<summary>ansible.cfg</summary>*
 
 ``` GO
 
@@ -699,7 +703,7 @@ remote_user = user
 
 <details>
 
-*<summary>/etc/ansible/hosts</summary>*
+*<summary>hosts</summary>*
 
 ``` GO
 
@@ -729,7 +733,7 @@ vm8 ansible_host=192.168.2.17
 
 <details>
 
-*<summary>/etc/ansible/play.yml</summary>*
+*<summary>play.yml</summary>*
 
 ``` GO
 
@@ -795,9 +799,11 @@ vm8 ansible_host=192.168.2.17
 
 #### *node-exporter*
 
+/etc/ansible/roles/node-exporter/
+
 <details>
 
-*<summary>/etc/ansible/roles/node-exporter/tasks/main.yml</summary>*
+*<summary>tasks/main.yml</summary>*
 
 ``` GO
 
@@ -814,7 +820,7 @@ vm8 ansible_host=192.168.2.17
 
 <details>
 
-*<summary>/etc/ansible/roles/node-exporter/tasks/install_node_exporter.yml</summary>*
+*<summary>tasks/install_node_exporter.yml</summary>*
 
 ``` GO
 
@@ -864,7 +870,7 @@ vm8 ansible_host=192.168.2.17
 
 <details>
 
-*<summary>/etc/ansible/roles/node-exporter/tasks/install_nginx_log_exporter.yml</summary>*
+*<summary>tasks/install_nginx_log_exporter.yml</summary>*
 
 ``` GO
 
@@ -915,7 +921,7 @@ vm8 ansible_host=192.168.2.17
 
 <details>
 
-*<summary>/etc/ansible/roles/node-exporter/vars/main.yml</summary>*
+*<summary>vars/main.yml</summary>*
 
 ``` GO
 
@@ -928,9 +934,11 @@ nginx_log_exporter : 1.9.2
 
 #### *prometheus*
 
+/etc/ansible/roles/Prometheus/
+
 <details>
 
-*<summary>/etc/ansible/roles/Prometheus/tasks/main.yml</summary>*
+*<summary>tasks/main.yml</summary>*
 
 ``` GO
 
@@ -947,7 +955,7 @@ nginx_log_exporter : 1.9.2
 
 <details>
 
-*<summary>/etc/ansible/roles/Prometheus/tasks/install_prometheus.yml</summary>*
+*<summary>tasks/install_prometheus.yml</summary>*
 
 ``` GO
 
@@ -1021,7 +1029,7 @@ nginx_log_exporter : 1.9.2
 
 <details>
 
-*<summary>/etc/ansible/roles/Prometheus/tasks/install_alertmanager.yml</summary>*
+*<summary>tasks/install_alertmanager.yml</summary>*
 
 ``` GO
 
@@ -1087,7 +1095,7 @@ nginx_log_exporter : 1.9.2
 
 <details>
 
-*<summary>/etc/ansible/roles/Prometheus/templates/prometheus.yml</summary>*
+*<summary>templates/prometheus.yml</summary>*
 
 ``` GO
 
@@ -1131,7 +1139,7 @@ scrape_configs:
 
 <details>
 
-*<summary>/etc/ansible/roles/Prometheus/vars/main.yml</summary>*
+*<summary>vars/main.yml</summary>*
 
 ``` GO
 
@@ -1144,9 +1152,11 @@ alertmanager_version : 0.21.0
 
 #### *grafana*
 
+/etc/ansible/roles/Grafana/
+
 <details>
 
-*<summary>/etc/ansible/roles/Grafana/tasks/main.yml</summary>*
+*<summary>tasks/main.yml</summary>*
 
 ``` GO
 
@@ -1193,7 +1203,7 @@ alertmanager_version : 0.21.0
 
 <details>
 
-*<summary>/etc/ansible/roles/Grafana/templates/main.yml</summary>*
+*<summary>templates/main.yml</summary>*
 
 ``` GO
 
@@ -1214,9 +1224,11 @@ datasources:
 
 #### *elasticsearch*
 
+/etc/ansible/roles/Elasticsearch/
+
 <details>
 
-*<summary>/etc/ansible/roles/Elasticsearch/tasks/main.yml</summary>*
+*<summary>tasks/main.yml</summary>*
 
 ``` GO
 
@@ -1258,9 +1270,11 @@ datasources:
 
 #### *filebeat*
 
+/etc/ansible/roles/filebeat/
+
 <details>
 
-*<summary>/etc/ansible/roles/filebeat/tasks/main.yml</summary>*
+*<summary>tasks/main.yml</summary>*
 
 ``` GO
 
@@ -1299,7 +1313,7 @@ datasources:
 
 <details>
 
-*<summary>/etc/ansible/roles/filebeat/templates/filebeat</summary>*
+*<summary>templates/filebeat</summary>*
 
 ``` GO
 
@@ -1336,7 +1350,7 @@ output.elasticsearch:
 
 <details>
 
-*<summary>/etc/ansible/roles/filebeat/templates/nginx</summary>*
+*<summary>templates/nginx</summary>*
 
 ``` GO
 
@@ -1354,9 +1368,11 @@ output.elasticsearch:
 
 #### *kibana*
 
+/etc/ansible/roles/kibana/
+
 <details>
 
-*<summary>/etc/ansible/roles/kibana/tasks/main.yml</summary>*
+*<summary>tasks/main.yml</summary>*
 
 ``` GO
 
@@ -1395,7 +1411,7 @@ output.elasticsearch:
 
 <details>
 
-*<summary>/etc/ansible/roles/kibana/templates/kibana.yml</summary>*
+*<summary>templates/kibana.yml</summary>*
 
 ``` GO
 
@@ -1432,7 +1448,9 @@ pid.file: /run/kibana/kibana.pid
 
 <details>
 
-*<summary>/etc/ansible/roles/nginx/tasks/main.yml</summary>*
+/etc/ansible/roles/nginx/
+
+*<summary>tasks/main.yml</summary>*
 
 ``` GO
 
@@ -1477,7 +1495,7 @@ pid.file: /run/kibana/kibana.pid
 
 <details>
 
-*<summary>/etc/ansible/roles/nginx/vars/main.yml</summary>*
+*<summary>vars/main.yml</summary>*
 
 ``` GO
 
@@ -1491,7 +1509,7 @@ client_max_body_size: 512M
 
 <details>
 
-*<summary>/etc/ansible/roles/nginx/static/index.html</summary>*
+*<summary>static/index.html</summary>*
 
 ``` HTML
 
@@ -1501,9 +1519,11 @@ client_max_body_size: 512M
 
 #### *bastion*
 
+/etc/ansible/roles/bastion/
+
 <details>
 
-*<summary>/etc/ansible/roles/bastion/tasks/main.yml</summary>*
+*<summary>tasks/main.yml</summary>*
 
 ``` GO
 

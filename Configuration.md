@@ -668,7 +668,7 @@ resource "yandex_compute_snapshot_schedule" "default" {
   name = "snap"
 
   schedule_policy {
-    expression = "0 9 * * *"
+    expression = "00 19 ? * *"
   }
 
   snapshot_count = 7

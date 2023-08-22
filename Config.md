@@ -1,7 +1,7 @@
 Содержание
 ==========
-* [Terraform](#Terraform:/home/admin/terraform/)
-* [Ansible](###Ansible:/etc/ansible/)
+* [Terraform](#Terraform)
+* [Ansible](#Ansible)
    * [node-exporter](#node-exporter)
    * [prometheus](#prometheus)
    * [grafana](#grafana)
@@ -12,7 +12,9 @@
    * [bastion](#bastion)
 
 ---------
-### Terraform:/home/admin/terraform/
+### Terraform
+
+/home/admin/terraform/
 
 <details>
 
@@ -684,7 +686,9 @@ resource "yandex_compute_snapshot_schedule" "default" {
 ```
 </details>
 
-### Ansible:/etc/ansible/
+### Ansible
+
+/etc/ansible/
 
 <details>
 

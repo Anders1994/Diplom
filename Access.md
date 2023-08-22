@@ -6,14 +6,14 @@
 
 | Сервер        | IP-адрес (LAN) | IP-адрес (WAN) | Логин   | Пароль               | 
 | ------------- | -------------- | -------------- | ------- | -------------------- |
-| Web1          | 192.168.2.15   |                |         |                      |
-| Web2          | 192.168.3.4    |                |         |                      |
-| Kibana        | 192.168.2.14   | 158.160.114.10 | admin   | admin                |
-| Grafana       | 192.168.2.36   | 51.250.67.36   | admin   |                      |
-| Bastion       | 192.168.2.17   | 158.160.118.89 | admin   | *private.key*        |
-| Terraform     | 192.168.2.11   |                | admin   | *private.key*        |
-| Prometheus    | 192.168.2.33   |                | admin   |                      |
-| Elasticsearch | 192.168.2.23   |                | elastic | gJ56Irber-Jh8QOio=YS |
+| Web1          | 192.168.2.21   |                |         |                      |
+| Web2          | 192.168.3.18   |                |         |                      |
+| Kibana        | 192.168.2.18   | 158.160.114.10 | admin   | admin                |
+| Grafana       | 192.168.2.13   | 51.250.67.36   | admin   |                      |
+| Bastion       | 192.168.2.5    | 158.160.118.89 | admin   | *private.key*        |
+| Terraform     | 192.168.2.16   |                | admin   | *private.key*        |
+| Prometheus    | 192.168.2.7    |                | admin   |                      |
+| Elasticsearch | 192.168.2.11   |                | elastic | gJ56Irber-Jh8QOio=YS |
  
 
 <details>

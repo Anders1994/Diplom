@@ -204,7 +204,7 @@ resource "yandex_compute_instance" "vm5" {
   network_interface {
     subnet_id = yandex_vpc_subnet.anders2.id
     nat       = true
-    security_group_ids = ["enphroi8q7uccvfdo28t"]
+    security_group_ids = ["enp93n7ct5p34mr4ru0l"]
   }
 
   metadata = {
@@ -273,7 +273,7 @@ resource "yandex_compute_instance" "vm7" {
   network_interface {
     subnet_id = yandex_vpc_subnet.anders2.id
     nat       = true
-    security_group_ids = ["enphroi8q7uccvfdo28t"]
+    security_group_ids = ["enp93n7ct5p34mr4ru0l"]
 }
   metadata = {
     user-data = "${file("/home/admin/terraform/metadata.txt")}"
@@ -302,7 +302,7 @@ resource "yandex_compute_instance" "vm8" {
 
   boot_disk {
     initialize_params {
-      image_id = "fd843htdp8usqsiji0bb"
+      image_id = "enpsttuo0dle5rtrlfbn"
     }
   }
 
@@ -355,13 +355,13 @@ resource "yandex_alb_target_group" "foo" {
   name           = "target-group"
 
   target {
-    subnet_id    = "e9b6slku7liimdj5jqgq"
-    ip_address   = "192.168.2.15"
+    subnet_id    = "e9bhpkesu69cg916bjr6"
+    ip_address   = "192.168.2.21"
   }
 
   target {
-    subnet_id    = "e2lmbuqsgrlau186thlb"
-    ip_address   = "192.168.3.4"
+    subnet_id    = "e2ltrsp9e5rhk3399jsn"
+    ip_address   = "192.168.3.18"
   }
 }
 ```
@@ -404,7 +404,7 @@ resource "yandex_alb_backend_group" "test-backend-group" {
     name                   = "backend-group"
     weight                 = 1
     port                   = 80
-    target_group_ids       = ["ds7nroqreljl3ccncm90"]
+    target_group_ids       = ["ds7p8bard46kkqco93qn"]
     load_balancing_config {
       panic_threshold      = 90
     }    
@@ -459,7 +459,7 @@ resource "yandex_alb_virtual_host" "my-virtual-host" {
     name                  = "main"
     http_route {
       http_route_action {
-        backend_group_id  = "ds7r41hec33n5sc8jp3o"
+        backend_group_id  = "ds7bbqdb5qvsv832iqa8"
         timeout           = "60s"
       }
     }
@@ -494,12 +494,12 @@ provider "yandex" {
 
 resource "yandex_alb_load_balancer" "test-balancer" {
   name        = "balancer"
-  network_id  = "enp558euc92kq4tn1fpi" 
+  network_id  = "enp2llv9dci8mogflbna" 
 
   allocation_policy {
     location {
       zone_id   = "ru-central1-a"
-      subnet_id = "e9b6slku7liimdj5jqgq"   
+      subnet_id = "e9bhpkesu69cg916bjr6"   
     }
   }
 
@@ -514,7 +514,7 @@ resource "yandex_alb_load_balancer" "test-balancer" {
     }
     http {
       handler {
-        http_router_id = "ds7823ms07o6impuu7k3"
+        http_router_id = "ds7dnv74tsiae73afiev"
       }
     }
   }
@@ -546,7 +546,7 @@ provider "yandex" {
 resource "yandex_vpc_security_group" "security" {
   name        = "security"
   description = "Description for security group"
-  network_id  = "enp558euc92kq4tn1fpi"
+  network_id  = "enp2llv9dci8mogflbna"
 
   ingress {
     protocol       = "TCP"
@@ -589,7 +589,7 @@ ingress {
 resource "yandex_vpc_security_group" "bastion" {
   name        = "bastion"
   description = "Description for security group"
-  network_id  = "enp558euc92kq4tn1fpi"
+  network_id  = "enp2llv9dci8mogflbna"
 
   ingress {
     protocol       = "TCP"

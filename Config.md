@@ -12,7 +12,7 @@
    * [bastion](#bastion)
 
 ---------
-### **Terraform**
+## Terraform
 
 `/home/admin/terraform/`
 
@@ -686,7 +686,7 @@ resource "yandex_compute_snapshot_schedule" "default" {
 ```
 </details>
 
-### Ansible
+## Ansible
 
 `/etc/ansible/`
 

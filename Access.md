@@ -4,17 +4,17 @@
 
 ### *Учетные данные*:
 
-| Сервер        | IP-адрес     | Логин   | Пароль               | 
-| ------------- | ------------ | ------- | -------------------- |
-| Web1          | 192.168.2.15 |         |                      |
-| Web2          | 192.168.3.4  |         |                      |
-| Kibana        | 192.168.2.14 | admin   | admin                |
-| Grafana       | 192.168.2.36 | admin   |                      |
-| Bastion       | 192.168.2.17 | admin   | *private.key*        |
-| Terraform     | 192.168.2.11 | admin   | *private.key*        |
-| Prometheus    | 192.168.2.33 | admin   |                      |
-| Elasticsearch | 192.168.2.23 | elastic | gJ56Irber-Jh8QOio=YS |
-
+| Сервер        | IP-адрес (LAN) | IP-адрес (WAN) | Логин   | Пароль               | 
+| ------------- | -------------- | -------------- | ------- | -------------------- |
+| Web1          | 192.168.2.15   |                |         |                      |
+| Web2          | 192.168.3.4    |                |         |                      |
+| Kibana        | 192.168.2.14   | 158.160.114.10 | admin   | admin                |
+| Grafana       | 192.168.2.36   | 51.250.67.36   | admin   |                      |
+| Bastion       | 192.168.2.17   | 158.160.118.89 | admin   | *private.key*        |
+| Terraform     | 192.168.2.11   |                | admin   | *private.key*        |
+| Prometheus    | 192.168.2.33   |                | admin   |                      |
+| Elasticsearch | 192.168.2.23   |                | elastic | gJ56Irber-Jh8QOio=YS |
+ 
 
 <details>
 

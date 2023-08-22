@@ -3,12 +3,12 @@
 * [Terraform](#Terraform)
 * [Ansible](#Ansible)
    * [node-exporter](#node-exporter)
+   * [nginx](#nginx)
    * [prometheus](#prometheus)
    * [grafana](#grafana)
    * [elasticsearch](#elasticsearch)
    * [filebeat](#filebeat)
    * [kibana](#kibana)
-   * [nginx](#nginx)
    * [bastion](#bastion)
 
 ---------

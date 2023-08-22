@@ -697,7 +697,7 @@ resource "yandex_compute_snapshot_schedule" "default" {
 ``` GO
 
 [defaults]
-remote_user = user
+remote_user = admin
 ```
 </details>
 
@@ -929,6 +929,82 @@ vm8 ansible_host=192.168.2.17
 
 node_exporter_version : 1.6.1
 nginx_log_exporter : 1.9.2
+```
+</details>
+
+#### *nginx*
+
+`/etc/ansible/roles/nginx/`
+
+<details>
+
+/etc/ansible/roles/nginx/
+
+*<summary>tasks/main.yml</summary>*
+
+``` GO
+
+---
+
+- name: Install Nginx Web Server on Debian Family
+  apt:
+    name=nginx
+    state=latest
+  when:
+    ansible_os_family == "Debian"
+  notify:
+    - nginx systemd
+
+- name: Replace nginx.conf
+  template:
+    src=templates/nginx.conf
+    dest=/etc/nginx/nginx.conf
+
+- name: Create home directory
+  file:
+    path: /var/lib/www
+    state: directory
+
+- name: copy the nginx config file and restart nginx
+  copy:
+    src: /etc/ansible/roles/nginx/templates/static_site.cfg
+    dest: /etc/nginx/sites-available/static_site.cfg
+
+- name: create symlink
+  file:
+    src: /etc/nginx/sites-available/static_site.cfg
+    dest: /etc/nginx/sites-enabled/default
+    state: link
+
+- name: copy the content of the web site
+  copy:
+    src: /etc/ansible/roles/nginx/static/
+    dest: /var/lib/www
+```
+</details>
+
+<details>
+
+*<summary>vars/main.yml</summary>*
+
+``` GO
+
+---
+
+worker_processes: auto
+worker_connections: 2048
+client_max_body_size: 512M
+```
+</details>
+
+<details>
+
+*<summary>static/index.html</summary>*
+
+``` HTML
+
+<center><h1>До новых встреч!</h1><center>
+<img src="https://media1.giphy.com/media/Z21HJj2kz9uBG/giphy.gif?cid=ecf05e475ooe8qyeye1vjhbrmdo91n2u3fucegrsxzahnggt&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="GIF">
 ```
 </details>
 
@@ -1441,81 +1517,6 @@ logging:
 
 # =================== System: Other ===================
 pid.file: /run/kibana/kibana.pid
-```
-</details>
-
-#### *nginx*
-
-`/etc/ansible/roles/nginx/`
-
-<details>
-
-/etc/ansible/roles/nginx/
-
-*<summary>tasks/main.yml</summary>*
-
-``` GO
-
----
-
-- name: Install Nginx Web Server on Debian Family
-  apt:
-    name=nginx
-    state=latest
-  when:
-    ansible_os_family == "Debian"
-  notify:
-    - nginx systemd
-
-- name: Replace nginx.conf
-  template:
-    src=templates/nginx.conf
-    dest=/etc/nginx/nginx.conf
-
-- name: Create home directory
-  file:
-    path: /var/lib/www
-    state: directory
-
-- name: copy the nginx config file and restart nginx
-  copy:
-    src: /etc/ansible/roles/nginx/templates/static_site.cfg
-    dest: /etc/nginx/sites-available/static_site.cfg
-
-- name: create symlink
-  file:
-    src: /etc/nginx/sites-available/static_site.cfg
-    dest: /etc/nginx/sites-enabled/default
-    state: link
-
-- name: copy the content of the web site
-  copy:
-    src: /etc/ansible/roles/nginx/static/
-    dest: /var/lib/www
-```
-</details>
-
-<details>
-
-*<summary>vars/main.yml</summary>*
-
-``` GO
-
----
-
-worker_processes: auto
-worker_connections: 2048
-client_max_body_size: 512M
-```
-</details>
-
-<details>
-
-*<summary>static/index.html</summary>*
-
-``` HTML
-
-<h1>Hello World from Netology</h1>
 ```
 </details>
 

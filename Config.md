@@ -9,6 +9,23 @@
 
 <details>
 
+*<summary>/home/admin/terraform/metadata.txt</summary>*
+
+``` GO
+
+#cloud-config
+users:
+  - name: admin
+    groups: sudo
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDpOo0+4sY1ac9Ki86DIdstDUaAskdZaOFv80gSdo2ohseAXTK+8lbYMMrxVOEtWyJqu9N0Pu0KC8Dyi05QOJxCvqrbIEjWc7RhLyUEQJTM7LXWo1z7gCEZo5Je7z2v1wM3z120WjSAdPx3Bg9jqbCUKofzpWSU9TtZ+nFCM1elSU3NFwQCbtC+o8IOjg5Q/tGBxTAgkuZtvoI5+O+CFYYr3SQ4Qiu3w1UUcXHYaWw2UEijS/rfnOCcWy+kWLx+obni+iKmOq5sOzvvGXOMpLcf08U1EIidHUKwOBAaG1DotI5u+cC/5t1xSb/ODo5Np4tnTyFStPSPyFal8fWLI1Vw4dKhntA5xDZtjmMwM3lxZJOWnAtSHZ8RpMDbuWDWWfpzElkU3EnA4fWknQmz1bXXOjFNmwiujK9xQsnSQ4SZBUehdewz269TAdg6HiFdOzQbZUmYTQyHfzjmk2tpd7eTCdO4tXrkL7ooJCXBRzrtdhHFDBapZvxzWta4KJ5pk7M= admin@terraform
+```
+</details>
+
+<details>
+
 *<summary>/home/admin/terraform/config.tf</summary>*
 
 ``` GO

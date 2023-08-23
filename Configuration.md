@@ -14,7 +14,7 @@
 ---------
 ## Terraform
 
-`/home/admin/terraform/`
+`/home/admin/.terraform.d/`
 
 <details>
 
@@ -111,7 +111,7 @@ resource "yandex_compute_instance" "vm2" {
   }
 
   metadata = {
-    user-data = "${file("/home/admin/terraform/metadata.txt")}"
+    user-data = "${file("/home/admin/.terraform.d/metadata.txt")}"
   }
 }
 
@@ -144,7 +144,7 @@ resource "yandex_compute_instance" "vm3" {
   }
 
   metadata = {
-    user-data = "${file("/home/admin/terraform/metadata.txt")}"
+    user-data = "${file("/home/admin/.terraform.d/metadata.txt")}"
   }
 }
 
@@ -176,7 +176,7 @@ resource "yandex_compute_instance" "vm4" {
 
   }
   metadata = {
-    user-data = "${file("/home/admin/terraform/metadata.txt")}"
+    user-data = "${file("/home/admin/.terraform.d/metadata.txt")}"
   }
 }
 
@@ -208,7 +208,7 @@ resource "yandex_compute_instance" "vm5" {
   }
 
   metadata = {
-    user-data = "${file("/home/admin/terraform/metadata.txt")}"
+    user-data = "${file("/home/admin/.terraform.d/metadata.txt")}"
   }
 }
 
@@ -244,7 +244,7 @@ resource "yandex_compute_instance" "vm6" {
   }
 
   metadata = {
-    user-data = "${file("/home/admin/terraform/metadata.txt")}"
+    user-data = "${file("/home/admin/.terraform.d/metadata.txt")}"
   }
 }
 
@@ -276,7 +276,7 @@ resource "yandex_compute_instance" "vm7" {
     security_group_ids = ["enp93n7ct5p34mr4ru0l"]
 }
   metadata = {
-    user-data = "${file("/home/admin/terraform/metadata.txt")}"
+    user-data = "${file("/home/admin/.terraform.d/metadata.txt")}"
   }
 }
 
@@ -312,7 +312,7 @@ resource "yandex_compute_instance" "vm8" {
     security_group_ids = ["enppkv83r7cv81fh9hti"]
   }
   metadata = {
-    user-data = "${file("/home/admin/terraform/metadata.txt")}"
+    user-data = "${file("/home/admin/.terraform.d/metadata.txt")}"
   }
 }
 

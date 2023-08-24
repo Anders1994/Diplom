@@ -14,7 +14,7 @@
 ---------
 ## Terraform
 
-`/home/admin/.terraform.d/`
+`/home/admin/terraform/`
 
 <details>
 
@@ -550,23 +550,23 @@ remote_user = admin
 ansible_python_interpreter=/usr/bin/python3
 
 [web_servers]
-vm2 ansible_host=192.168.2.15
-vm3 ansible_host=192.168.3.4
+vm2 ansible_host=192.168.1.10
+vm3 ansible_host=192.168.2.10
 
 [prometheus]
-vm4 ansible_host=192.168.2.33
+vm4 ansible_host=192.168.1.11
 
 [grafana]
-vm5 ansible_host=192.168.2.36
+vm5 ansible_host=192.168.1.13
 
 [Elasticsearch]
-vm6 ansible_host=192.168.2.23
+vm6 ansible_host=192.168.1.12
 
 [kibana]
-vm7 ansible_host=192.168.2.14
+vm7 ansible_host=192.168.1.14
 
 [bastion]
-vm8 ansible_host=192.168.2.17
+vm8 ansible_host=192.168.1.15
 ```
 </details>
 

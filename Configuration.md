@@ -2,8 +2,8 @@
 ==========
 * [Terraform](#Terraform)
 * [Ansible](#Ansible)
-   * [node-exporter](#node-exporter)
    * [nginx](#nginx)
+   * [node-exporter](#node-exporter)
    * [prometheus](#prometheus)
    * [grafana](#grafana)
    * [elasticsearch](#elasticsearch)

@@ -648,11 +648,9 @@ vm8 ansible_host=192.168.1.15
 
 #### *nginx*
 
-`/etc/ansible/roles/nginx/`
+`roles/nginx/`
 
 <details>
-
-/etc/ansible/roles/nginx/
 
 *<summary>tasks/main.yml</summary>*
 
@@ -730,7 +728,7 @@ client_max_body_size: 512M
 
 #### *node-exporter*
 
-`/etc/ansible/roles/node-exporter/`
+`roles/node-exporter/`
 
 <details>
 
@@ -865,7 +863,7 @@ nginx_log_exporter : 1.9.2
 
 #### *prometheus*
 
-/etc/ansible/roles/prometheus/
+`roles/prometheus/`
 
 <details>
 
@@ -1083,7 +1081,7 @@ alertmanager_version : 0.21.0
 
 #### *grafana*
 
-`/etc/ansible/roles/grafana/`
+`roles/grafana/`
 
 <details>
 
@@ -1155,7 +1153,7 @@ datasources:
 
 #### *elasticsearch*
 
-`/etc/ansible/roles/elasticsearch/`
+`roles/elasticsearch/`
 
 <details>
 
@@ -1201,7 +1199,7 @@ datasources:
 
 #### *filebeat*
 
-`/etc/ansible/roles/filebeat/`
+`roles/filebeat/`
 
 <details>
 
@@ -1285,7 +1283,7 @@ output.elasticsearch:
 
 #### *kibana*
 
-`/etc/ansible/roles/kibana/`
+`roles/kibana/`
 
 <details>
 
@@ -1363,7 +1361,7 @@ pid.file: /run/kibana/kibana.pid
 
 #### *bastion*
 
-`/etc/ansible/roles/bastion/`
+`roles/bastion/`
 
 <details>
 

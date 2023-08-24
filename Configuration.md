@@ -400,72 +400,26 @@ terraform {
  output "external_ip_address_vm_8" {
    value = yandex_compute_instance.vm8.network_interface.0.nat_ip_address
  }
-```
-</details>
 
-<details>
-
-*<summary>targetgroup/config.tf</summary>*
-
-``` GO
-
-terraform {
-  required_providers {
-    yandex = {
-      source = "yandex-cloud/yandex"
-    }
-  }
-  required_version = ">= 0.13"
-}
-
-provider "yandex" {
-  cloud_id  = "b1gcvt5l6bsrvg3nfac5"
-  folder_id = "b1g0bhh4bik34mog3r9m"
-  zone      = "ru-central1-a"
-}
+ ////////////////////////////////////////////////////////////////////////
 
 resource "yandex_alb_target_group" "foo" {
   name           = "target-group"
 
   target {
-    subnet_id    = "e9bhpkesu69cg916bjr6"
-    ip_address   = "192.168.2.21"
+    subnet_id    = yandex_vpc_subnet.lan1.id
+    ip_address   = yandex_compute_instance.vm2.network_interface.0.ip_address
   }
 
   target {
-    subnet_id    = "e2ltrsp9e5rhk3399jsn"
-    ip_address   = "192.168.3.18"
+    subnet_id    = yandex_vpc_subnet.lan2.id
+    ip_address   = yandex_compute_instance.vm3.network_interface.0.ip_address
   }
 }
-```
-</details>
 
-<details>
+ ////////////////////////////////////////////////////////////////////////
 
-*<summary>backendgroup/config.tf</summary>*
-
-``` GO
-
-terraform {
-  required_providers {
-    yandex = {
-      source = "yandex-cloud/yandex"
-    }
-  }
-  required_version = ">= 0.13"
-}
-
-#provider "yandex" {
-#  zone = "ru-central1-a"
-#}
-
-provider "yandex" {
-  cloud_id  = "b1gcvt5l6bsrvg3nfac5"
-  folder_id = "b1g0bhh4bik34mog3r9m"
-  zone      = "ru-central1-a"
-}
-
-resource "yandex_alb_backend_group" "test-backend-group" {
+resource "yandex_alb_backend_group" "backend-group" {
   name                     = "backend-group"
   session_affinity {
     connection {
@@ -477,7 +431,7 @@ resource "yandex_alb_backend_group" "test-backend-group" {
     name                   = "backend-group"
     weight                 = 1
     port                   = 80
-    target_group_ids       = ["ds7p8bard46kkqco93qn"]
+    target_group_ids       = [yandex_alb_target_group.foo.id]
     load_balancing_config {
       panic_threshold      = 90
     }    
@@ -492,30 +446,8 @@ resource "yandex_alb_backend_group" "test-backend-group" {
     }
   }
 }
-```
-</details>
 
-<details>
-
-*<summary>router/config.tf</summary>*
-
-``` GO
-
-terraform {
-  required_providers {
-    yandex = {
-      source = "yandex-cloud/yandex"
-    }
-  }
-  required_version = ">= 0.13"
-}
-
-
-provider "yandex" {
-  cloud_id  = "b1gcvt5l6bsrvg3nfac5"
-  folder_id = "b1g0bhh4bik34mog3r9m"
-  zone      = "ru-central1-a"
-}
+ ////////////////////////////////////////////////////////////////////////
 
 resource "yandex_alb_http_router" "tf-router" {
   name          = "router"
@@ -532,47 +464,23 @@ resource "yandex_alb_virtual_host" "my-virtual-host" {
     name                  = "main"
     http_route {
       http_route_action {
-        backend_group_id  = "ds7bbqdb5qvsv832iqa8"
+        backend_group_id  = yandex_alb_backend_group.backend-group.id
         timeout           = "60s"
       }
     }
   }
 }
-```
-</details>
 
-<details>
+ ////////////////////////////////////////////////////////////////////////
 
-*<summary>balancer/config.tf</summary>*
-
-``` GO
-
-terraform {
-  required_providers {
-    yandex = {
-      source = "yandex-cloud/yandex"
-    }
-  }
-  required_version = ">= 0.13"
-}
-
-
-provider "yandex" {
-  cloud_id  = "b1gcvt5l6bsrvg3nfac5"
-  folder_id = "b1g0bhh4bik34mog3r9m"
-  zone      = "ru-central1-a"
-}
-
-
-
-resource "yandex_alb_load_balancer" "test-balancer" {
+resource "yandex_alb_load_balancer" "balancer" {
   name        = "balancer"
-  network_id  = "enp2llv9dci8mogflbna" 
+  network_id  = yandex_vpc_network.net.id
 
   allocation_policy {
     location {
       zone_id   = "ru-central1-a"
-      subnet_id = "e9bhpkesu69cg916bjr6"   
+      subnet_id = yandex_vpc_subnet.lan1.id   
     }
   }
 
@@ -587,155 +495,13 @@ resource "yandex_alb_load_balancer" "test-balancer" {
     }
     http {
       handler {
-        http_router_id = "ds7dnv74tsiae73afiev"
+        http_router_id = yandex_alb_http_router.tf-router.id
       }
     }
   }
 }
-```
-</details>
 
-<details>
-
-*<summary>security/config.tf</summary>*
-
-``` GO
-
-terraform {
-  required_providers {
-    yandex = {
-      source = "yandex-cloud/yandex"
-    }
-  }
-  required_version = ">= 0.13"
-}
-
-provider "yandex" {
-  cloud_id  = "b1gcvt5l6bsrvg3nfac5"
-  folder_id = "b1g0bhh4bik34mog3r9m"
-  zone      = "ru-central1-a"
-}
-
-resource "yandex_vpc_security_group" "security" {
-  name        = "security"
-  description = "Description for security group"
-  network_id  = "enp2llv9dci8mogflbna"
-
-  ingress {
-    protocol       = "TCP"
-    description    = "grafana"
-    v4_cidr_blocks = ["0.0.0.0/0"]
-    port           = 3000
-  }
-
-ingress {
-    protocol       = "TCP"
-    description    = "kibana"
-    v4_cidr_blocks = ["0.0.0.0/0"]
-    port           = 5601
-  }
-
-ingress {
-    protocol       = "TCP"
-    description    = "application load balancer"
-    v4_cidr_blocks = ["0.0.0.0/0"]
-    port           = 80
-  }
-
-ingress {
-    protocol       = "TCP"
-    description    = "SSH-permission"
-    v4_cidr_blocks = ["192.168.2.0/24"]
-    port           = 22
-  }
-
-
-  egress {
-    protocol       = "ANY"
-    description    = "Rule description 2"
-    v4_cidr_blocks = ["0.0.0.0/0"]
-    from_port      = 0
-    to_port        = 65535
-  }
-}
-
-resource "yandex_vpc_security_group" "bastion" {
-  name        = "bastion"
-  description = "Description for security group"
-  network_id  = "enp2llv9dci8mogflbna"
-
-  ingress {
-    protocol       = "TCP"
-    description    = "bastion"
-    v4_cidr_blocks = ["0.0.0.0/0"]
-    port           = 22
-  }
-
-  egress {
-    protocol       = "ANY"
-    description    = "Rule description 2"
-    v4_cidr_blocks = ["0.0.0.0/0"]
-    from_port      = 0
-    to_port        = 65535
-  }
-}
-```
-</details>
-
-<details>
-
-*<summary>snapshots/config.tf</summary>*
-
-``` GO
-
-terraform {
-  required_providers {
-    yandex = {
-      source = "yandex-cloud/yandex"
-    }
-  }
-  required_version = ">= 0.13"
-}
-
-provider "yandex" {
-  cloud_id  = "b1gcvt5l6bsrvg3nfac5"
-  folder_id = "b1g0bhh4bik34mog3r9m"
-  zone      = "ru-central1-a"
-}
-
-data "yandex_compute_instance" "vm2" {
-  name = "web1"
-}
-
-data "yandex_compute_instance" "vm3" {
-  name = "web2"
-
-}
-
-data "yandex_compute_instance" "vm4" {
-  name = "prometheus"
-
-}
-
-data "yandex_compute_instance" "vm5" {
-  name = "grafana"
-
-}
-
-data "yandex_compute_instance" "vm6" {
-  name = "elasticsearch"
-
-}
-
-data "yandex_compute_instance" "vm7" {
-  name = "kibana"
-
-}
-
-data "yandex_compute_instance" "vm8" {
-  name = "bastion"
-
-}
+ ////////////////////////////////////////////////////////////////////////
 
 resource "yandex_compute_snapshot_schedule" "default" {
   name = "snap"
@@ -746,13 +512,13 @@ resource "yandex_compute_snapshot_schedule" "default" {
 
   snapshot_count = 7
 
-  disk_ids = [data.yandex_compute_instance.vm2.boot_disk.0.disk_id,
-              data.yandex_compute_instance.vm3.boot_disk[0].disk_id,
-              data.yandex_compute_instance.vm4.boot_disk[0].disk_id,
-              data.yandex_compute_instance.vm5.boot_disk[0].disk_id,
-              data.yandex_compute_instance.vm6.boot_disk[0].disk_id, 
-              data.yandex_compute_instance.vm7.boot_disk[0].disk_id,           
-              data.yandex_compute_instance.vm8.boot_disk[0].disk_id,
+  disk_ids = [yandex_compute_instance.vm2.boot_disk[0].disk_id,
+              yandex_compute_instance.vm3.boot_disk[0].disk_id,
+              yandex_compute_instance.vm4.boot_disk[0].disk_id,
+              yandex_compute_instance.vm5.boot_disk[0].disk_id,
+              yandex_compute_instance.vm6.boot_disk[0].disk_id, 
+              yandex_compute_instance.vm7.boot_disk[0].disk_id,           
+              yandex_compute_instance.vm8.boot_disk[0].disk_id,
              ]
 
 }

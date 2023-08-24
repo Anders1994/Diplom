@@ -55,7 +55,7 @@ terraform {
    zone      = "ru-central1-a"
  }
  
- ////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
  
  resource "yandex_vpc_network" "net" {
    name = "net"
@@ -401,7 +401,7 @@ terraform {
    value = yandex_compute_instance.vm8.network_interface.0.nat_ip_address
  }
 
- ////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 resource "yandex_alb_target_group" "foo" {
   name           = "target-group"
@@ -417,7 +417,7 @@ resource "yandex_alb_target_group" "foo" {
   }
 }
 
- ////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 resource "yandex_alb_backend_group" "backend-group" {
   name                     = "backend-group"
@@ -447,7 +447,7 @@ resource "yandex_alb_backend_group" "backend-group" {
   }
 }
 
- ////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 resource "yandex_alb_http_router" "tf-router" {
   name          = "router"
@@ -471,7 +471,7 @@ resource "yandex_alb_virtual_host" "my-virtual-host" {
   }
 }
 
- ////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 resource "yandex_alb_load_balancer" "balancer" {
   name        = "balancer"
@@ -501,7 +501,7 @@ resource "yandex_alb_load_balancer" "balancer" {
   }
 }
 
- ////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 resource "yandex_compute_snapshot_schedule" "default" {
   name = "snap"
@@ -559,7 +559,7 @@ vm4 ansible_host=192.168.1.11
 [grafana]
 vm5 ansible_host=192.168.1.13
 
-[Elasticsearch]
+[elasticsearch]
 vm6 ansible_host=192.168.1.12
 
 [kibana]
@@ -583,10 +583,9 @@ vm8 ansible_host=192.168.1.15
   remote_user: admin
   roles:
    - role: nginx
+     tags: nginx
    - role: node-exporter
      tags: exporter
-   - role: filebeat
-     tags: filebeat
 
   vars:
     nginx_user: www-data
@@ -597,25 +596,36 @@ vm8 ansible_host=192.168.1.15
   become_method: sudo
   become_user: root
   roles:
-    - role: Prometheus
+    - role: prometheus
       tags: prom
+      
 - hosts: grafana
   user: admin
   become: true
   become_method: sudo
   become_user: root
   roles:
-    - role: Grafana
+    - role: grafana
       tags: graf
-- hosts: Elasticsearch
+      
+- hosts: elasticsearch
   user: admin
   become: true
   become_method: sudo
   become_user: root
   roles:
-    - role: Elasticsearch
+    - role: elasticsearch
       tags: elastic
 
+- hosts: web_servers
+  become: true
+  become_method: sudo
+  become_user: root
+  remote_user: admin
+  roles:
+   - role: filebeat
+     tags: filebeat  
+  
 - hosts: kibana
   user: admin
   become: true
@@ -633,6 +643,88 @@ vm8 ansible_host=192.168.1.15
   roles:
     - role: bastion
       tags: bastion
+```
+</details>
+
+#### *nginx*
+
+`/etc/ansible/roles/nginx/`
+
+<details>
+
+/etc/ansible/roles/nginx/
+
+*<summary>tasks/main.yml</summary>*
+
+``` GO
+
+---
+
+- name: Install Nginx Web Server on Debian Family
+  apt:
+    name=nginx
+    state=latest
+  when:
+    ansible_os_family == "Debian"
+  notify:
+    - nginx systemd
+
+- name: Replace nginx.conf
+  template:
+    src=templates/nginx.conf
+    dest=/etc/nginx/nginx.conf
+
+- name: Create home directory
+  file:
+    path: /var/lib/www
+    state: directory
+
+- name: copy the nginx config file and restart nginx
+  copy:
+    src: /etc/ansible/roles/nginx/templates/static_site.cfg
+    dest: /etc/nginx/sites-available/static_site.cfg
+
+- name: create symlink
+  file:
+    dest: /etc/nginx/sites-enabled/default
+    state: link
+
+- name: copy the content of the web site
+  copy:
+    src: /etc/ansible/roles/nginx/static/
+    dest: /var/lib/www
+```
+</details>
+
+<details>
+
+*<summary>vars/main.yml</summary>*
+
+``` GO
+
+---
+
+worker_processes: auto
+worker_connections: 2048
+client_max_body_size: 512M
+```
+</details>
+
+<details>
+
+*<summary>static/index.html</summary>*
+
+``` HTML
+
+<html>
+  <head>
+<meta charset="UTF-8">
+
+<center><h1>До новых встреч!</h1><center>
+<img src="https://media1.giphy.com/media/Z21HJj2kz9uBG/giphy.gif?cid=ecf05e475ooe8qyeye1vjhbrmdo91n2u3fucegrsxzahnggt&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="GIF">
+
+  </head>
+  </html>
 ```
 </details>
 
@@ -771,85 +863,9 @@ nginx_log_exporter : 1.9.2
 ```
 </details>
 
-#### *nginx*
-
-`/etc/ansible/roles/nginx/`
-
-<details>
-
-/etc/ansible/roles/nginx/
-
-*<summary>tasks/main.yml</summary>*
-
-``` GO
-
----
-
-- name: Install Nginx Web Server on Debian Family
-  apt:
-    name=nginx
-    state=latest
-  when:
-    ansible_os_family == "Debian"
-  notify:
-    - nginx systemd
-
-- name: Replace nginx.conf
-  template:
-    src=templates/nginx.conf
-    dest=/etc/nginx/nginx.conf
-
-- name: Create home directory
-  file:
-    path: /var/lib/www
-    state: directory
-
-- name: copy the nginx config file and restart nginx
-  copy:
-    src: /etc/ansible/roles/nginx/templates/static_site.cfg
-    dest: /etc/nginx/sites-available/static_site.cfg
-
-- name: create symlink
-  file:
-    src: /etc/nginx/sites-available/static_site.cfg
-    dest: /etc/nginx/sites-enabled/default
-    state: link
-
-- name: copy the content of the web site
-  copy:
-    src: /etc/ansible/roles/nginx/static/
-    dest: /var/lib/www
-```
-</details>
-
-<details>
-
-*<summary>vars/main.yml</summary>*
-
-``` GO
-
----
-
-worker_processes: auto
-worker_connections: 2048
-client_max_body_size: 512M
-```
-</details>
-
-<details>
-
-*<summary>static/index.html</summary>*
-
-``` HTML
-
-<center><h1>До новых встреч!</h1><center>
-<img src="https://media1.giphy.com/media/Z21HJj2kz9uBG/giphy.gif?cid=ecf05e475ooe8qyeye1vjhbrmdo91n2u3fucegrsxzahnggt&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="GIF">
-```
-</details>
-
 #### *prometheus*
 
-/etc/ansible/roles/Prometheus/
+/etc/ansible/roles/prometheus/
 
 <details>
 
@@ -1039,16 +1055,16 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
       - targets:
-          - 192.168.3.4:9100
-          - 192.168.2.15:9100
+          - 192.168.1.10:9100
+          - 192.168.2.10:9100
     # metrics_path defaults to '/metrics'
     # scheme defaults to 'http'.
    - job_name: 'nginx_exporter'
     scrape_interval: 5s
     static_configs:
       - targets: 
-          - 192.168.3.4:4040
-          - 192.168.2.15:4040
+          - 192.168.1.10:4040
+          - 192.168.2.10:4040
 ```
 </details>
 
@@ -1067,7 +1083,7 @@ alertmanager_version : 0.21.0
 
 #### *grafana*
 
-`/etc/ansible/roles/Grafana/`
+`/etc/ansible/roles/grafana/`
 
 <details>
 
@@ -1090,7 +1106,7 @@ alertmanager_version : 0.21.0
 
 - name: Download Grafana
   copy:
-    src: "/etc/ansible/roles/Grafana/static/grafana_10.0.2_amd64.deb"
+    src: "/etc/ansible/roles/grafana/static/grafana_10.0.2_amd64.deb"
     dest: /tmp/grafana
 
 - name: Install Grafana
@@ -1099,7 +1115,7 @@ alertmanager_version : 0.21.0
 
 - name: Copy template
   copy:
-    src: "/etc/ansible/roles/Grafana/templates/main.yml"
+    src: "/etc/ansible/roles/grafana/templates/main.yml"
     dest: /etc/grafana/provisioning/datasources
 
 - name: Create directories for Dashboards
@@ -1109,7 +1125,7 @@ alertmanager_version : 0.21.0
 
 - name: Copy json
   copy:
-    src: "/etc/ansible/roles/Grafana/templates/metrics.json"
+    src: "/etc/ansible/roles/grafana/templates/metrics.json"
     dest: /var/lib/grafana/dashboards
     owner: grafana
     group: grafana
@@ -1132,14 +1148,14 @@ datasources:
     orgId: 1
     basicAuth: false
     editable: false
-    url: http://192.168.2.33:9090
+    url: http://192.168.1.11:9090
 ```
 </details>
 
 
 #### *elasticsearch*
 
-`/etc/ansible/roles/Elasticsearch/`
+`/etc/ansible/roles/elasticsearch/`
 
 <details>
 
@@ -1162,7 +1178,7 @@ datasources:
 
 - name: Download elasticsearch
   copy:
-    src: "/etc/ansible/roles/Elasticsearch/static/elasticsearch-8.8.2-amd64.deb"
+    src: "/etc/ansible/roles/elasticsearch/static/elasticsearch-8.8.2-amd64.deb"
     dest: /tmp/elasticsearch
 
 - name: Install java
@@ -1178,7 +1194,7 @@ datasources:
 - name: Copy CA to ansible
   ansible.builtin.fetch:
     src: /etc/elasticsearch/certs/http_ca.crt
-    dest: /etc/ansible/roles/Elasticsearch/static/
+    dest: /etc/ansible/roles/elasticsearch/static/
 ```
 </details>
 
@@ -1234,29 +1250,15 @@ datasources:
 
 ---
 
-filebeat.inputs:
-- type: log
-  enabled: false
-  paths:
-      - /var/log/nginx/access.log
-  fields:
-    type: nginx_access
-  fields_under_root: true
-  scan_frequency: 5s
+    filebeat.config.modules:
+  enabled: true
+  path: /etc/filebeat/modules.d/*.yml
 
-- type: log
-  enabled: false
-  paths:
-      - /var/log/nginx/error.log
-  fields:
-    type: nginx_error
-  fields_under_root: true
-  scan_frequency: 5s
 
 output.elasticsearch:
-  hosts: ["https://192.168.2.23:9200"]
+  hosts: ["https://192.168.1.12:9200"]
   username: "elastic"
-  password: "gJ56Irber-Jh8QOio=YS" 
+  password: "ej+sb58L*D5oS53X55e9"
   ssl:
     enabled: true
     certificate_authorities: ["/etc/filebeat/http_ca.crt"]
@@ -1334,9 +1336,9 @@ output.elasticsearch:
 server.host: "0.0.0.0"
 
 # =================== System: Elasticsearch ===================
-elasticsearch.hosts: ["https://192.168.2.23:9200"]
+elasticsearch.hosts: ["https://192.168.1.12:9200"]
 elasticsearch.username: "kibana_system"
-elasticsearch.password: "2sefwI0SFcHpQYzzevpb"
+elasticsearch.password: "DXquCq0G2=Cq6fnkqCBD"
 
 # =================== System: Elasticsearch (Optional) ===================
 elasticsearch.ssl.certificateAuthorities: [ "/etc/kibana/certs/http_ca.crt" ]

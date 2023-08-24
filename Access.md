@@ -1,24 +1,24 @@
 ### Yandex Cloud
 
-[cloud-anders](https://console.cloud.yandex.ru/folders/b1g0bhh4bik34mog3r9m)
+[cloud-anders](https://console.cloud.yandex.ru/cloud/b1gcvt5l6bsrvg3nfac5)
 
 ### *Учетные данные*:
 
 | Сервер        | IP-адрес (LAN) | IP-адрес (WAN) | Логин   | Пароль               | 
 | ------------- | -------------- | -------------- | ------- | -------------------- |
-| Web1          | 192.168.2.21   |                |         |                      |
-| Web2          | 192.168.3.18   |                |         |                      |
-| Kibana        | 192.168.2.18   | 158.160.114.10 | admin   | admin                |
-| Grafana       | 192.168.2.13   | 51.250.67.36   | admin   |                      |
-| Bastion       | 192.168.2.5    | 158.160.118.89 | admin   | *private.key*        |
-| Terraform     | 192.168.2.16   |                | admin   | *private.key*        |
-| Prometheus    | 192.168.2.7    |                | admin   |                      |
-| Elasticsearch | 192.168.2.11   |                | elastic | gJ56Irber-Jh8QOio=YS |
+| Web1          | 192.168.1.10   |                |         |                      |
+| Web2          | 192.168.2.10   |                |         |                      |
+| Kibana        | 192.168.1.14   | ?????????????? | admin   | admin                |
+| Grafana       | 192.168.1.13   | ?????????????? | admin   | admin                |
+| Bastion       | 192.168.1.15   | ?????????????? | admin   | *private.key*        |
+| Terraform     | 192.168.1.26   |                | admin   |                      |
+| Prometheus    | 192.168.1.11   |                | admin   |                      |
+| Elasticsearch | 192.168.1.12   |                | elastic | ej+sb58L*D5oS53X55e9 |
  
 
 <details>
 
-*<summary>ppk (bastion)</summary>*
+*<summary>private.key (bastion)</summary>*
 
 ``` GO
 
@@ -48,5 +48,15 @@ AIEA0l6TGOxqc1XxBHU6tnzZ18QddbaeNZ1rITa0SWiNh8A5JMmd1tLH2kMvTT7W
 tPe0w7sAyQs3rmTmSdDEOWHpm7v78O7buK4g++r7RWC3vJM4t1k4m4jsSaYeSm5S
 GXrfSd35nW/jNqOS4P974JaAS7uUm0UlhxLxgegNyWOxaY4=
 Private-MAC: 955142b6b7ea5fcfef5e4273ea8777d6dcfd6c5f938df8ea80c84d0485d4e8a9
+```
+</details>
+
+<details>
+
+*<summary>publik.key (bastion)</summary>*
+
+``` GO
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCJ2oUvBH5WMNppeVg+dIKlnN+bjlTn5Ni+zK0A0sMaR+nL44Cw+Mh9cL0cp70F+P+IlfkAWVULgkCZgju7KGrMxnrnyPVFpiA2TjbMy9pHqpCydbEZlni6p2NoauymTtEZXPcCHXYA2slbKl/zaoJhuFub2P2w5TpPLXIch7fhXXI3AYDftECs33v82vZhsRacMGOQtVaKBYbIup0+TXErWoRkB1iuHnEEUvCnxbHSoKGn0rAwd7B1WuCeRsJMCRF88i9ED+gCgg3c0vUZjxCzjhTSxqjcxn9vQtDQ/MUKVYUcLN6mfZlDiNZVXHzy6c9xsOQOFH2Eat/6gwOndk03 rsa-key-20230824
 ```
 </details>

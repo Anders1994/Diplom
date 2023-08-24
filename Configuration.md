@@ -29,7 +29,8 @@ users:
     shell: /bin/bash
     sudo: ['ALL=(ALL) NOPASSWD:ALL']
     ssh-authorized-keys:
-       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDCtAda4X6uzM8J2IvQrJhixXrLrov1OCjADgwYqlPz9rUMG7glFeOJFf1YiQSJArRymqED/dIj0hYhBxfBvrZLnG+P3rEi0UsdlM0CEEn5pMlRZdvg3/EQvarNL88exchWOjSyDE7xBinLr+SANuLl4x8bV5YwPK2yUUNyw6taDYfHJBOpMMsKOBYj6PYg6dBSZs/+XwIbZVoRL8XLIq1YfC75Ao/MF/hmB3mPwkHssmWWUIPtu/eU0jr1EbwPdjZfaIMpkLtIzcP1JRyBXWqJ4mR+OhycYlENW+0TJcQ/EVrV1VObOfPbS1chUwBlvw3Eut+ILtPN2NPT6unVdSKR rsa-key-20230821
+       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCmdVg1X09vRNs+4Ai4Q+L2X2Zkdlh8livQKG8KhAyjIO3XRA5JlIgIFVvk2H6DwqbJEk2KXbI98hpNUqp1XyzRmO+LERtMPLWtbs4aGaAuagoNzNLPJKu+xM0ThSzAfBjfXOANXjlIR8VaYjIzSG3L3Fn3Ks7HS5P9ijGKsmwR5qA+pTBHQuVCUXRO7shAvL0fnpEtsPUVyG/VIM15ZbxVeLoUp4+ZAC4v4GrqRvj3EEfy3EypJ2PvsawsmlvPzoSQ3TGRTu4UV7doTgXMVPJGYSdlynD1CND9aPJTBOcJ3gxnnSxlWXQct9svTZG/6axq4PqS80H+30izZhUpe214TPI7xu23kqUvZj3Qgv8/Wc5e4u3ec0Y31d9vpm6IQYMRhd++Dwdf+gmOXpx7W7P7n8Hqt+WGnzRwepLELwLAggILB1cwo4GCvW4aO4ipWbkY/NhSN0MTBBf7ZMFP2hZPtBedl6yleCTTazCk4TcN+jJo+kFTz8eHvth8ps822Fs= admin@terraform
+       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCJ2oUvBH5WMNppeVg+dIKlnN+bjlTn5Ni+zK0A0sMaR+nL44Cw+Mh9cL0cp70F+P+IlfkAWVULgkCZgju7KGrMxnrnyPVFpiA2TjbMy9pHqpCydbEZlni6p2NoauymTtEZXPcCHXYA2slbKl/zaoJhuFub2P2w5TpPLXIch7fhXXI3AYDftECs33v82vZhsRacMGOQtVaKBYbIup0+TXErWoRkB1iuHnEEUvCnxbHSoKGn0rAwd7B1WuCeRsJMCRF88i9ED+gCgg3c0vUZjxCzjhTSxqjcxn9vQtDQ/MUKVYUcLN6mfZlDiNZVXHzy6c9xsOQOFH2Eat/6gwOndk03 rsa-key-20230824
 ```
 </details>
 
@@ -40,293 +41,365 @@ users:
 ``` GO
 
 terraform {
-
-  required_providers {
-
-    yandex = {
-
-      source = "yandex-cloud/yandex"
-
-    }
-
-  }
-
-  required_version = ">= 0.13"
-
-}
-
-provider "yandex" {
-
-    cloud_id  = "b1gcvt5l6bsrvg3nfac5"
-
-  folder_id = "b1g0bhh4bik34mog3r9m"
-
-  zone      = "ru-central1-a"
-
-}
-
-////////////////////////////////////////////////////////////////////////
-
-resource "yandex_vpc_network" "anders" {
-
-  name = "anders"
-
-}
-
-resource "yandex_vpc_subnet" "anders2" {
-  name           = "anders2"
-  zone           = "ru-central1-a"
-  network_id     = yandex_vpc_network.anders.id
-  v4_cidr_blocks = ["192.168.2.0/24"]
-}
-
-resource "yandex_vpc_subnet" "anders3" {
-  name           = "anders3"
-  zone           = "ru-central1-b"
-  network_id     = yandex_vpc_network.anders.id
-  v4_cidr_blocks = ["192.168.3.0/24"]
-}
-
-////////////////////////////////////////////////////////////////////////
-
-resource "yandex_compute_instance" "vm2" {
-  name = "web1"
-  allow_stopping_for_update = true
-
-  resources {
-    cores  = 2
-    memory = 2
-	core_fraction = 20
-  }
-
-  boot_disk {
-    initialize_params {
-      image_id = "fd843htdp8usqsiji0bb"
-    }
-  }
-
-  network_interface {
-    subnet_id = yandex_vpc_subnet.anders2.id
-    nat       = false
-  }
-
-  metadata = {
-    user-data = "${file("/home/admin/.terraform.d/metadata.txt")}"
-  }
-}
-
-output "internal_ip_address_vm_2" {
-  value = yandex_compute_instance.vm2.network_interface.0.ip_address
-}
-
-////////////////////////////////////////////////////////////////////////
-
-resource "yandex_compute_instance" "vm3" {
-  name = "web2"
-  allow_stopping_for_update = true
-
-  zone = "ru-central1-b"
-  resources {
-    cores  = 2
-    memory = 2
-	core_fraction = 20
+   required_providers {
+     yandex = {
+       source = "yandex-cloud/yandex"
+     }
    }
-
-  boot_disk {
-    initialize_params {
-      image_id = "fd843htdp8usqsiji0bb"
-    }
-  }
-
-  network_interface {
-    subnet_id = yandex_vpc_subnet.anders3.id
-    nat       = false
-  }
-
-  metadata = {
-    user-data = "${file("/home/admin/.terraform.d/metadata.txt")}"
-  }
-}
-
-output "internal_ip_address_vm_3" {
-  value = yandex_compute_instance.vm3.network_interface.0.ip_address
-}
-
+   required_version = ">= 0.13"
+ }
+ 
+ provider "yandex" {
+   cloud_id  = "b1gcvt5l6bsrvg3nfac5"
+   folder_id = "b1g1dblvrp7v3jf53ph6"
+   zone      = "ru-central1-a"
+ }
+ 
+ ////////////////////////////////////////////////////////////////////////
+ 
+ resource "yandex_vpc_network" "net" {
+   name = "net"
+ }
+ 
+ resource "yandex_vpc_subnet" "lan1" {
+   name           = "lan1"
+   zone           = "ru-central1-a"
+   network_id     = yandex_vpc_network.net.id
+   v4_cidr_blocks = ["192.168.1.0/24"]
+ }
+ 
+ resource "yandex_vpc_subnet" "lan2" {
+   name           = "lan2"
+   zone           = "ru-central1-b"
+   network_id     = yandex_vpc_network.net.id
+   v4_cidr_blocks = ["192.168.2.0/24"]
+ }
+ 
 ////////////////////////////////////////////////////////////////////////
 
-resource "yandex_compute_instance" "vm4" {
-  name = "prometheus"
-  allow_stopping_for_update = true
-
-  resources {
-    cores  = 2
-    memory = 2
-	core_fraction = 20
-  }
-
-  boot_disk {
-    initialize_params {
-      image_id = "fd843htdp8usqsiji0bb"
-    }
-  }
-
-  network_interface {
-    subnet_id = yandex_vpc_subnet.anders2.id
-    nat       = false
-
-  }
-  metadata = {
-    user-data = "${file("/home/admin/.terraform.d/metadata.txt")}"
-  }
-}
-
-output "internal_ip_address_vm_4" {
-  value = yandex_compute_instance.vm4.network_interface.0.ip_address
-}
-
-////////////////////////////////////////////////////////////////////////
-
-resource "yandex_compute_instance" "vm5" {
-  name = "grafana"
-  allow_stopping_for_update = true
-    resources {
-    cores  = 2
-    memory = 2
-	core_fraction = 20
+ resource "yandex_vpc_security_group" "security" {
+   name        = "security"
+   description = "Description for security group"
+   network_id  = yandex_vpc_network.net.id
+ 
+   ingress {
+     protocol       = "TCP"
+     description    = "grafana"
+     v4_cidr_blocks = ["0.0.0.0/0"]
+     port           = 3000
    }
-
-  boot_disk {
-    initialize_params {
-      image_id = "fd843htdp8usqsiji0bb"
-    }
-  }
-
-  network_interface {
-    subnet_id = yandex_vpc_subnet.anders2.id
-    nat       = true
-    security_group_ids = ["enp93n7ct5p34mr4ru0l"]
-  }
-
-  metadata = {
-    user-data = "${file("/home/admin/.terraform.d/metadata.txt")}"
-  }
-}
-
-output "internal_ip_address_vm_5" {
-  value = yandex_compute_instance.vm5.network_interface.0.ip_address
-}
-
-output "external_ip_address_vm_5" {
-  value = yandex_compute_instance.vm5.network_interface.0.nat_ip_address
-}
-
-////////////////////////////////////////////////////////////////////////
-
-resource "yandex_compute_instance" "vm6" {
-  name = "elasticsearch"
-  allow_stopping_for_update = true
-
-  resources {
-    cores  = 2
-    memory = 2
-	core_fraction = 20
+ 
+   ingress {
+     protocol       = "TCP"
+     description    = "kibana"
+     v4_cidr_blocks = ["0.0.0.0/0"]
+     port           = 5601
    }
-
-  boot_disk {
-    initialize_params {
-      image_id = "fd843htdp8usqsiji0bb"
-    }
-  }
-
-  network_interface {
-    subnet_id = yandex_vpc_subnet.anders2.id
-    nat       = false
-  }
-
-  metadata = {
-    user-data = "${file("/home/admin/.terraform.d/metadata.txt")}"
-  }
-}
-
-output "internal_ip_address_vm_6" {
-  value = yandex_compute_instance.vm6.network_interface.0.ip_address
-}
-
-////////////////////////////////////////////////////////////////////////
-
-resource "yandex_compute_instance" "vm7" {
-  name = "kibana"
-  allow_stopping_for_update = true
-
-  resources {
-    cores  = 2
-    memory = 2
-	core_fraction = 20
-  }
-
-  boot_disk {
-    initialize_params {
-      image_id = "fd843htdp8usqsiji0bb"
-    }
-  }
-
-  network_interface {
-    subnet_id = yandex_vpc_subnet.anders2.id
-    nat       = true
-    security_group_ids = ["enp93n7ct5p34mr4ru0l"]
-}
-  metadata = {
-    user-data = "${file("/home/admin/.terraform.d/metadata.txt")}"
-  }
-}
-
-output "internal_ip_address_vm_7" {
-  value = yandex_compute_instance.vm7.network_interface.0.ip_address
-}
-
-output "external_ip_address_vm_7" {
-  value = yandex_compute_instance.vm7.network_interface.0.nat_ip_address
-}
+   
+   ingress {
+     protocol       = "TCP"
+     description    = "application load balancer"
+     v4_cidr_blocks = ["0.0.0.0/0"]
+     port           = 80
+   }
+   
+   ingress {
+     protocol       = "TCP"
+     description    = "SSH-permission"
+     v4_cidr_blocks = ["192.168.0.0/16"]
+     port           = 22
+   }
+   
+   
+   egress {
+     protocol       = "ANY"
+     description    = "Rule description 2"
+     v4_cidr_blocks = ["0.0.0.0/0"]
+     from_port      = 0
+     to_port        = 65535
+   }
+ }
+ 
+ resource "yandex_vpc_security_group" "bastion" {
+   name        = "bastion"
+   description = "Description for bastion group"
+   network_id  = yandex_vpc_network.net.id
+ 
+   ingress {
+     protocol       = "TCP"
+     description    = "bastion"
+     v4_cidr_blocks = ["0.0.0.0/0"]
+     port           = 22
+   }
+ 
+   egress {
+     protocol       = "ANY"
+     description    = "Rule description 2"
+     v4_cidr_blocks = ["0.0.0.0/0"]
+     from_port      = 0
+     to_port        = 65535
+   }
+ }
 
 ////////////////////////////////////////////////////////////////////////
 
-resource "yandex_compute_instance" "vm8" {
-  name = "bastion"
-  allow_stopping_for_update = true
+ resource "yandex_compute_instance" "vm2" {
+   name                      = "web1"
+   hostname                  = "web1"
+   zone                      = "ru-central1-a"
+   allow_stopping_for_update = true
+   
+   resources {
+     core_fraction = 20
+ 	 cores         = 2
+     memory        = 2
+   }
+ 
+   boot_disk {
+     initialize_params {
+       image_id = "fd843htdp8usqsiji0bb"
+     }
+   }
+ 
+   network_interface {
+     subnet_id  = yandex_vpc_subnet.lan1.id
+     ip_address = "192.168.1.10"
+	 nat        = false
+   }
+ 
+   metadata = {
+     user-data = "${file("/home/admin/terraform/metadata.txt")}"
+   }
+ }
+ 
+ output "internal_ip_address_vm_2" {
+   value = yandex_compute_instance.vm2.network_interface.0.ip_address
+ }
 
+////////////////////////////////////////////////////////////////////////
+
+ resource "yandex_compute_instance" "vm3" {
+   name                      = "web2"
+   hostname                  = "web2"
+   zone                      = "ru-central1-b"
+   allow_stopping_for_update = true
+ 
+   resources {
+     core_fraction = 20
+     cores         = 2
+     memory        = 2
+   }
+ 
+   boot_disk {
+     initialize_params {
+       image_id = "fd843htdp8usqsiji0bb"
+     }
+   }
+ 
+   network_interface {
+     subnet_id  = yandex_vpc_subnet.lan2.id
+	 ip_address = "192.168.2.10"
+     nat        = false
+   }
+ 
+   metadata = {
+     user-data = "${file("/home/admin/terraform/metadata.txt")}"
+   }
+ }
+ 
+ output "internal_ip_address_vm_3" {
+   value = yandex_compute_instance.vm3.network_interface.0.ip_address
+ }
+
+////////////////////////////////////////////////////////////////////////
+
+ resource "yandex_compute_instance" "vm4" {
+   name                      = "prometheus"
+   hostname                  = "prometheus"
+   zone                      = "ru-central1-a"
+   allow_stopping_for_update = true
+  
   resources {
-    cores  = 2
-    memory = 2
-	core_fraction = 20
-  }
+    core_fraction = 20
+	cores         = 2
+    memory        = 2
+   }
+ 
+   boot_disk {
+     initialize_params {
+       image_id = "fd843htdp8usqsiji0bb"
+     }
+   }
+ 
+   network_interface {
+     subnet_id  = yandex_vpc_subnet.lan1.id
+	 ip_address = "192.168.1.11"
+     nat        = false
+   }
+   
+   metadata = {
+     user-data = "${file("/home/admin/terraform/metadata.txt")}"
+   }
+ }
+ 
+ output "internal_ip_address_vm_4" {
+   value = yandex_compute_instance.vm4.network_interface.0.ip_address
+ }
 
-  boot_disk {
-    initialize_params {
-      image_id = "enpsttuo0dle5rtrlfbn"
+////////////////////////////////////////////////////////////////////////
+
+ resource "yandex_compute_instance" "vm5" {
+   name                      = "elasticsearch"
+   hostname                  = "elasticsearch"
+   zone                      = "ru-central1-a"
+   allow_stopping_for_update = true
+ 
+   resources {
+ 	 core_fraction = 20
+     cores         = 2
+     memory        = 2
     }
-  }
+ 
+    boot_disk {
+      initialize_params {
+        image_id = "fd843htdp8usqsiji0bb"
+      }
+    }
+    
+    network_interface {
+     subnet_id  = yandex_vpc_subnet.lan1.id
+	 ip_address = "192.168.1.12"
+     nat        = false
+    }
+    
+    metadata = {
+      user-data = "${file("/home/admin/terraform/metadata.txt")}"
+    }
+ }
+ 
+ output "internal_ip_address_vm_5" {
+   value = yandex_compute_instance.vm5.network_interface.0.ip_address
+ }
 
-  network_interface {
-    subnet_id = yandex_vpc_subnet.anders2.id
-    nat       = true
-    security_group_ids = ["enppkv83r7cv81fh9hti"]
-  }
-  metadata = {
-    user-data = "${file("/home/admin/.terraform.d/metadata.txt")}"
-  }
-}
+////////////////////////////////////////////////////////////////////////
 
-output "internal_ip_address_vm_8" {
-  value = yandex_compute_instance.vm8.network_interface.0.ip_address
-}
+ resource "yandex_compute_instance" "vm6" {
+   name                      = "grafana"
+   hostname                  = "grafana"
+   zone                      = "ru-central1-a"
+   allow_stopping_for_update = true
+   
+  resources {
+    core_fraction = 20
+	cores         = 2
+    memory        = 2
+   }
+ 
+   boot_disk {
+     initialize_params {
+       image_id = "fd843htdp8usqsiji0bb"
+     }
+   }
+ 
+   network_interface {
+     subnet_id          = yandex_vpc_subnet.lan1.id
+	 ip_address         = "192.168.1.13"
+     nat                = true
+     security_group_ids = [yandex_vpc_security_group.security.id]
+   }
+ 
+   metadata = {
+     user-data = "${file("/home/admin/terraform/metadata.txt")}"
+   }
+ }
+ 
+ output "internal_ip_address_vm_6" {
+   value = yandex_compute_instance.vm6.network_interface.0.ip_address
+ }
+ 
+ output "external_ip_address_vm_6" {
+   value = yandex_compute_instance.vm6.network_interface.0.nat_ip_address
+ }
+ 
+////////////////////////////////////////////////////////////////////////
 
-output "external_ip_address_vm_8" {
-  value = yandex_compute_instance.vm8.network_interface.0.nat_ip_address
-}
+ resource "yandex_compute_instance" "vm7" {
+   name                      = "kibana"
+   hostname                  = "kibana"
+   zone                      = "ru-central1-a"
+   allow_stopping_for_update = true
+   
+  resources {
+    core_fraction = 20
+	cores         = 2
+    memory        = 2
+   }
+ 
+   boot_disk {
+     initialize_params {
+       image_id = "fd843htdp8usqsiji0bb"
+     }
+   }
+ 
+   network_interface {
+     subnet_id          = yandex_vpc_subnet.lan1.id
+	 ip_address         = "192.168.1.14"
+     nat                = true
+     security_group_ids = [yandex_vpc_security_group.security.id]
+   }
+ 
+   metadata = {
+     user-data = "${file("/home/admin/terraform/metadata.txt")}"
+   }
+ }
+ 
+ output "internal_ip_address_vm_7" {
+   value = yandex_compute_instance.vm7.network_interface.0.ip_address
+ }
+ 
+ output "external_ip_address_vm_7" {
+   value = yandex_compute_instance.vm7.network_interface.0.nat_ip_address
+ }
+ 
+////////////////////////////////////////////////////////////////////////
 
-output "schedule_disk" {
-  value =  [   resource.yandex_compute_instance.vm2.boot_disk[0].disk_id   ]
-}
+ resource "yandex_compute_instance" "vm8" {
+   name                      = "bastion"
+   hostname                  = "bastion"
+   zone                      = "ru-central1-a"
+   allow_stopping_for_update = true
+   
+  resources {
+    core_fraction = 20
+	cores         = 2
+    memory        = 2
+   }
+ 
+   boot_disk {
+     initialize_params {
+       image_id = "fd843htdp8usqsiji0bb"
+     }
+   }
+ 
+   network_interface {
+     subnet_id          = yandex_vpc_subnet.lan1.id
+	 ip_address         = "192.168.1.15"
+     nat                = true
+     security_group_ids = [yandex_vpc_security_group.bastion.id]
+   }
+ 
+   metadata = {
+     user-data = "${file("/home/admin/terraform/metadata.txt")}"
+   }
+ }
+ 
+ output "internal_ip_address_vm_8" {
+   value = yandex_compute_instance.vm8.network_interface.0.ip_address
+ }
+ 
+ output "external_ip_address_vm_8" {
+   value = yandex_compute_instance.vm8.network_interface.0.nat_ip_address
+ }
 ```
 </details>
 

@@ -10,7 +10,7 @@
 
 
 ---------
-## Инфраструктура
+# Инфраструктура
 
 Разработана отказоустойчивя инфраструктура для сайта, включающая мониторинг, сбор логов и резервное копирование основных данных.
 
@@ -22,7 +22,7 @@
 
 Файлы конфигураций описаны в [Configuration](https://github.com/Anders1994/Diplom/blob/main/Configuration.md).
 
-### Сайт
+## Сайт
 
 Созданы `ВМ для веб-сервера` web1 и web2, в разных зонах доступности ru-central1-a и ru-central1-b соответственно.
 На них установлен nginx и использован набор статичных файлов для сайта.
@@ -46,7 +46,7 @@
 ![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Curl.png)
 ![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Site.png)
 
-### Мониторинг
+## Мониторинг
 
 Создана `ВМ для Prometheus` и на ней развернут Prometheus.
 
@@ -61,7 +61,7 @@
 Настроены дешборды с отображением метрик USE (Utilization, Saturation, Errors) для CPU, RAM, диски, сеть, http_response_count_total, http_response_size_bytes.
 Добавлены необходимые tresholds на соответствующие графики.
 
-### Логи
+## Логи
 
 Cоздана `ВМ для Elasticsearch`.
 Установлен filebeat в ВМ с веб-серверами, настроен на отправку access.log, error.log nginx в Elasticsearch.
@@ -69,7 +69,7 @@ Cоздана `ВМ для Elasticsearch`.
 Создана `ВМ для Kibana` и на ней установлена Kibana.
 Настроено соединение с Elasticsearch.
 
-### Сеть
+## Сеть
 
 Развернута `Сеть` net.
 ![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Net.png)
@@ -87,7 +87,7 @@ Cоздана `ВМ для Elasticsearch`.
 Подключение ко всем серверам по ssh осуществляется через этот хост.
 ![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Bastion SSH.png)
 
-### Резервное копирование
+## Резервное копирование
 
 Настроено ежедневное создание snapshot дисков в 22:00 по МСК.
 Время жизни snapshot ограничено 7 днями.

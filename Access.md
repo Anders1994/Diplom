@@ -2,8 +2,6 @@
 
 ### *Yandex Cloud*: [cloud-anders](https://console.cloud.yandex.ru/cloud/b1gcvt5l6bsrvg3nfac5)
 
-[private.key](https://github.com/Anders1994/Diplom/files/12436252/private.zip)
-
 | Сервер        | IP-адрес (LAN) | IP-адрес (WAN) | Логин   | Пароль                                                                         | 
 | ------------- | -------------- | -------------- | ------- | ------------------------------------------------------------------------------ |
 | Web1          | 192.168.1.10   |                |         |                                                                                |

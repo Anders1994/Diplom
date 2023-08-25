@@ -91,4 +91,5 @@ Cоздана `ВМ для Elasticsearch`.
 
 Настроено ежедневное создание snapshot дисков в 22:00 по МСК.
 Время жизни snapshot ограничено 7 днями.
+
 ![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Snapshot.png)

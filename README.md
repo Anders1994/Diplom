@@ -24,12 +24,12 @@
 
 ## Сайт
 
-Созданы `ВМ для веб-сервера` web1 и web2, в разных зонах доступности ru-central1-a и ru-central1-b соответственно.
++ Созданы `ВМ для веб-сервера` web1 и web2, в разных зонах доступности ru-central1-a и ru-central1-b соответственно.
 На них установлен nginx и использован набор статичных файлов для сайта.
 
 ![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Nginx.png)
 
-Создана `Target Group`, в неё включены две созданные ВМ.
++Создана `Target Group`, в неё включены две созданные ВМ.
 
 ![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Target_group.png)
 

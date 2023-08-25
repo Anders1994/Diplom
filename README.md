@@ -29,17 +29,17 @@
 ![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Nginx.png)
 
 Создана `Target Group`, в неё включены две созданные ВМ.
-![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Target group.png)
+![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Target_group.png)
 
 Создана `Backend Group`, настроены backends на target group, healthcheck на корень (/) и порт 80, протокол HTTP.
-![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Backend group.png)
+![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Backend_group.png)
 
 Создан `HTTP router` для backend group, путь указан — /.
 ![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Router.png)
 
 Создан `Application load balancer` для распределения трафика на веб-сервера.Задан listener тип auto, порт 80.
 ![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Balancer.png)
-![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Balancer map.png)
+![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Balancer_map.png)
 
 
 Проверяем сайт:
@@ -51,8 +51,8 @@
 Создана `ВМ для Prometheus` и на ней развернут Prometheus.
 
 Установлены `Node Exporter` и `Nginx Log Exporter` на ВМ веб-серверов.
-![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Node exporter.png)
-![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Log exporter.png)
+![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Node_exporter.png)
+![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Log_exporter.png)
 
 Настроен `Prometheus` на сбор метрик.
 
@@ -79,8 +79,8 @@ Cоздана `ВМ для Elasticsearch`.
 ![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/VM.png)
 
 Настроены ` Security Groups` на входящий трафик:
-![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Bastion IN.png)
-![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Security IN.png)
+![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Bastion_IN.png)
+![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Security_IN.png)
 
 Настроена `ВМ с публичным адресом` bastion, для нее открыт только один порт — ssh. Security groups настроены на разрешение входящего ssh из этой группы.
 Эта ВМ реализовывает концепцию bastion host.

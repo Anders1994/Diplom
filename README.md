@@ -85,6 +85,7 @@
 ![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Net.png)
 
 Сервера web1, web2, prometheus, elasticsearch находятся в приватной подсети.
+
 Сервера grafana, kibana, application load balancer находятся в публичной подсети.
 
 ![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/VM.png)

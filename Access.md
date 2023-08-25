@@ -1,6 +1,6 @@
 ## Доступы
 
-##№ *Yandex Cloud*
+### *Yandex Cloud*
 
 [cloud-anders](https://console.cloud.yandex.ru/cloud/b1gcvt5l6bsrvg3nfac5)
 

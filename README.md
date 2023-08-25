@@ -85,18 +85,17 @@
 ![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Net.png)
 
 Сервера web1, web2, prometheus, elasticsearch находятся в приватной подсети.
-
 Сервера grafana, kibana, application load balancer находятся в публичной подсети.
 
 ![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/VM.png)
 
-+ Настроены `Security Groups` на входящий трафик:
++ Настроены `Security Groups` на входящий трафик.
 
 ![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Bastion_IN.png)
 
 ![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Security_IN.png)
 
-+ Настроена `ВМ с публичным адресом` bastion, для нее открыт только один порт — ssh. 
++ Настроена `ВМ с публичным адресом` bastion, для нее открыт только один порт — ssh.
   Security groups настроены на разрешение входящего ssh из этой группы.
   Эта ВМ реализовывает концепцию bastion host.
   Подключение ко всем серверам по ssh осуществляется через этот хост.

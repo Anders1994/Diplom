@@ -1,7 +1,7 @@
 ### Yandex Cloud
 
 [cloud-anders](https://console.cloud.yandex.ru/cloud/b1gcvt5l6bsrvg3nfac5)
-
+[private.key](https://github.com/Anders1994/Diplom/files/12436252/private.zip)
 ### *Учетные данные*:
 
 | Сервер        | IP-адрес (LAN) | IP-адрес (WAN) | Логин   | Пароль               | 
@@ -60,5 +60,3 @@ Private-MAC: 955142b6b7ea5fcfef5e4273ea8777d6dcfd6c5f938df8ea80c84d0485d4e8a9
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCJ2oUvBH5WMNppeVg+dIKlnN+bjlTn5Ni+zK0A0sMaR+nL44Cw+Mh9cL0cp70F+P+IlfkAWVULgkCZgju7KGrMxnrnyPVFpiA2TjbMy9pHqpCydbEZlni6p2NoauymTtEZXPcCHXYA2slbKl/zaoJhuFub2P2w5TpPLXIch7fhXXI3AYDftECs33v82vZhsRacMGOQtVaKBYbIup0+TXErWoRkB1iuHnEEUvCnxbHSoKGn0rAwd7B1WuCeRsJMCRF88i9ED+gCgg3c0vUZjxCzjhTSxqjcxn9vQtDQ/MUKVYUcLN6mfZlDiNZVXHzy6c9xsOQOFH2Eat/6gwOndk03 rsa-key-20230824
 ```
 </details>
-
-[cloud-anders](https://github.com/Anders1994/Diplom/blob/main/private.key.ppk)

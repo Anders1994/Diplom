@@ -100,7 +100,7 @@ Cоздана `ВМ для Elasticsearch`.
 Эта ВМ реализовывает концепцию bastion host.
 Подключение ко всем серверам по ssh осуществляется через этот хост.
 
-![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Bastion SSH.png)
+![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Bastion_SSH.png)
 
 ## Резервное копирование
 

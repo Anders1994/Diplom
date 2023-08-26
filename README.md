@@ -71,7 +71,7 @@
 
 + Создана `ВМ для Grafana` и на ней установлена Grafana.
   Настроено взаимодействие с Prometheus.
-  Настроены [дешборды](http://158.160.119.107:3000/d/rYdddlPWk/node-exporter-full?orgId=1&refresh=5s) с отображением метрик USE (Utilization, Saturation, Errors) для   CPU, RAM, диски, сеть, http_response_count_total, http_response_size_bytes.
+  Настроены [дашборды](http://158.160.119.107:3000/d/rYdddlPWk/node-exporter-full?orgId=1&refresh=5s) с отображением метрик USE (Utilization, Saturation, Errors) для CPU, RAM, диски, сеть, http_response_count_total, http_response_size_bytes.
   Добавлены необходимые tresholds на соответствующие графики.
 
   ![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Grafana_dash.png)

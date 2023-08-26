@@ -47,8 +47,7 @@
 
 ![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Balancer_map.png)
 
-
-+ Проверяем сайт:
++ Проверяем [сайт](http://130.193.41.61/):
 
 ![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Curl.png)
 
@@ -57,6 +56,11 @@
 ## Мониторинг
 
 + Создана `ВМ для Prometheus` и на ней развернут Prometheus.
+
+![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Prometheus.png)
+
+![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Curl_Prometheus.png)
+
   Установлены `Node Exporter` и `Nginx Log Exporter` на ВМ веб-серверов.
 
 ![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Node_exporter.png)
@@ -67,16 +71,21 @@
 
 + Создана `ВМ для Grafana` и на ней установлена Grafana.
   Настроено взаимодействие с Prometheus.
-  Настроены дешборды с отображением метрик USE (Utilization, Saturation, Errors) для   CPU, RAM, диски, сеть, http_response_count_total, http_response_size_bytes.
+  Настроены [дешборды](http://158.160.119.107:3000/d/rYdddlPWk/node-exporter-full?orgId=1&refresh=5s) с отображением метрик USE (Utilization, Saturation, Errors) для   CPU, RAM, диски, сеть, http_response_count_total, http_response_size_bytes.
   Добавлены необходимые tresholds на соответствующие графики.
+
+  ![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Grafana_dash.png)
 
 ## Логи
 
 + Cоздана `ВМ для Elasticsearch`.
-  Установлен filebeat в ВМ с веб-серверами, настроен на отправку access.log, error.log   nginx в Elasticsearch.
+  Установлен filebeat в ВМ с веб-серверами, настроен на отправку access.log, error.log nginx в Elasticsearch.
 
 + Создана `ВМ для Kibana` и на ней установлена Kibana.
-  Настроено соединение с Elasticsearch.
+
+![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Kibana.png)
+
+  Настроено соединение с [Elasticsearch](http://158.160.99.44:5601/).
 
 ## Сеть
 

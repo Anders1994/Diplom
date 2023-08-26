@@ -1336,7 +1336,7 @@ server.host: "0.0.0.0"
 # =================== System: Elasticsearch ===================
 elasticsearch.hosts: ["https://192.168.1.12:9200"]
 elasticsearch.username: "kibana_system"
-elasticsearch.password: "DXquCq0G2=Cq6fnkqCBD"
+elasticsearch.password: "14H5=s4ihueBy7ZPz*f="
 
 # =================== System: Elasticsearch (Optional) ===================
 elasticsearch.ssl.certificateAuthorities: [ "/etc/kibana/certs/http_ca.crt" ]

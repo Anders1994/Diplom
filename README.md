@@ -82,6 +82,8 @@
 + Cоздана `ВМ для Elasticsearch`.
   Установлен filebeat в ВМ с веб-серверами, настроен на отправку access.log, error.log nginx в Elasticsearch.
 
+![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Elasticsearch.png)
+
 + Создана `ВМ для Kibana` и на ней установлена Kibana.
 
 ![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Kibana.png)

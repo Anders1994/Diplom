@@ -1254,7 +1254,7 @@ datasources:
 
 
 output.elasticsearch:
-  hosts: ["https://192.168.1.12:9200"]
+  hosts: ["http://192.168.1.12:9200"]
   username: "elastic"
   password: "ej+sb58L*D5oS53X55e9"
   ssl:

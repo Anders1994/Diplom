@@ -87,6 +87,8 @@
 
   Настроено соединение с [Elasticsearch](http://158.160.99.44:5601/).
 
+  ![image](https://github.com/Anders1994/Diplom/blob/main/ScreenShots/Kibana_dash.png)
+
 ## Сеть
 
 + Развернута `Сеть` net.
